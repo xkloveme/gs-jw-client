@@ -9,7 +9,7 @@
     </div>
     <div ref="pdfDom">
       <h1 style="font-family: DengXian; text-align: center; font-size: 32pt">
-        廉情信息报告表
+        廉情卡报告表
       </h1>
       <div style="text-align: center; margin: 200px auto; width: 500px">
         <p style="
@@ -146,7 +146,7 @@
           orphans: 0;
           font-size: 12pt;
         ">
-        <span style="font-family: DengXian">廉情信息报告表{{ id }}</span>
+        <span style="font-family: DengXian">廉情卡报告表{{ id }}</span>
       </p>
       <p style="
           margin-top: 20pt;
@@ -1192,7 +1192,7 @@ export default {
       //       }
       //     }
       //   }
-      //   pdf.save('廉情信息报告表.pdf')
+      //   pdf.save('廉情卡报告表.pdf')
       // })
     },
     exportPdf () {

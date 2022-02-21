@@ -4,165 +4,143 @@
  * tableStatus是表的标示,有无此类情况格式类似tableStatus:{table1:1,table2:0},1为有2为没有
  */
 const db = {
-  uid:'', // 生成数据表唯一id
+  uid: '', // 生成数据表唯一id
   version: '', // 版本号
   name: '', // 姓名
   gender: '', // 性别
   idCard: '', // 身份证号
-  workingStatus: '',
-  fullTimeEducation:"",//全日制学历
-  onTimeEducation:"",//在职学历
-  nation: '', // 民族
+  phone: '', // 手机号
+  employer: '', // 工作单位
+  duty: '', // 现任职务
   politicsStatus: '', // 政治面貌
   work: '', // 分管工作
-  employer: '', // 工作单位
-  community:'',// 村社区
-  workingYears:'', // 工作年限
-  phone: '', // 联系电话
-  duty: '', // 现任职务
-  grade:'', // 职级
-  position:'', // 职位
-  personnelSource:'', // 人员来源
-  objectIdentity:'', // 对象身份
-  department: '', // 部门
-  partyTime: '', // 入党时间
-  branch:'', // 所在支部
-  identity: [], // 人员身份 枚举
-  householdRegistration: '', // 户籍地址
-  currentResidence: '', // 现居住地
-  personalResume: '', // 个人简历
-  resume:[{
-    time:[],
-    startTime:'',//开始时间
-    endTime:'',//结束时间
-    unitName:'',//单位
+  marriage: "",//婚姻
+  like: "",//个人爱好
+  homeAddress: "",//家庭地址
+  income: "",//工资收入
+  otherIncome: "",//其他收入
+  homeYearIncome: '',//家庭年收入
+  grade: '', // 职级
+  spouseName: "",//配偶信息姓名
+  spouseIdCard: '', // 配偶信息身份证号
+  spousePhone: '', // 配偶信息手机号
+  spousedDuty: '', // 配偶信息单位及职务
+  spouseYearIncome: '', // 配偶信息年度收入
+  resume: [{
+    time: [],
+    startTime: '',//开始时间
+    endTime: '',//结束时间
+    unitName: '',//单位
     department: '', // 科室
     job: ''// 职务
   }], // 工作简历
-  password: '',
-  checkPassword: '',
-  imageUrl: '', // 照片
-  other: '', // 超长字符串,类似备注
-  tableStatus: {},
-  // 本人、配偶、共同生活子女为所有权人或共有人的房屋出售情况
-  houseSale: [{
-    people: '', // 产权人
-    whereabouts: '', // 房产来源
-    realEstateCertificate: '', // 不动产权证号
-    source: '', // 房产去向
+  // 租用房屋情况
+  house: [{
+    source: '', // 标的物
     address: '', // 具体地址
-    area: '', // 建筑面积
-    propertyNature: '', // 产权性质
-    transactionTime: '', // 交易时间
     transactionPrice: '' // 交易价格
   }],
-  // 未办证产权
-  notRushEstate: [{
-    people: '', // 产权人
+  // 租用车库（位）情况
+  rentalGarage: [{
+    source: '', // 标的物
+    address: '', // 具体地址
+    transactionPrice: '' // 交易价格
+  }],
+  // 拒收及上交礼金、礼品、烟票、有价证券的时间、数量、种类
+  gift: [{
+    time: '', // 时间
+    num: '', // 数量
+    type: '' // 种类
+  }],
+  // 个人因公出国考察(培训)和因私出国(境)情况  // 出国情况
+  travelAbroad: [{
+    startTime: '',
+    endTime: '',
+    address: '',//地点
+    money: '',//费用来由
+    reasons: '', // 出国事由
+  }],
+  // 配偶、子女及其配偶出国(境)工作、留学、移(定)居情况
+  childMoved: [{
+    title: '', // 称谓
+    startTime: '',
+    endTime: '',
+    address: '',//地点
+    money: '',//费用来由
+    reasons: '', // 出国事由
+  }],
+  // 购、借、租公共资产(车、财物)等情况(财物名称及来源、时间、费用)
+  publicAssets: [{
+    title: '', // 财务名称
+    source: '',//来源
+    time: '',
+    money: '',//费用来由
+  }],
+  // 借贷情况(借贷对象、时间、金额
+  borrow: [{
+    title: '', // 借贷对象
+    time: '',
+    money: '',//金额
+    vadish: '',//是否管理服务对象及其亲
+  }],
+  // 本人、配偶、子女及其配偶注册个体工商户、个人独资企业或者合伙企业的情况
+  partnership: [{
+    name: '',
+    businessScope: '', // 经营范围
+    marketSubjectType: '', // 企业性质
+    money: '', // 注册资金
+    personalContribution: '', // 投资金额
+    fundedRatio: '' // 出资比例
+  }],
+  // 配偶、子女及其配偶在银行任职情况(银行名称、所任职务、任职时间)
+  bank: [{
     relationship: '', // 与本人关系
-    caseNo:'',    // 网签合同编号或网签备案号
-    source: '', // 房产来源
-    address: '', // 具体地址
-    area: '', // 建筑面积
-    propertyNature: '', // 产权性质
-    transactionTime: '', // 交易时间
-    transactionPrice: '' // 交易价格
+    name: '', // 姓名
+    bank: '',    // 任职银行
+    bankDuty: '', // 职务
+    startTime: '',// 任职时间
+    endTime: '',// 任职时间
+    vadish: '', // 有无公款存放其任职银行
   }],
-  // 宅基地
-  homestead: [{
-    people: '', // 产权人
-    realEstateCertificate:'',//不动产权证
-    // relationship: '', // 与本人关系
-    source: '', // 房产来源
-    address: '', // 具体地址
-    area: '', // 建筑面积
-    // propertyNature: '', // 产权性质
-    transactionTime: '', // 交易时间
-    transactionPrice: '' // 交易价格
+  // 利用名贵特产类特殊资源谋取私立问题：违规公款购买、收送、占用、插手干预，本人或配偶子女及其配偶、特定关系人违规参与经营等情况
+  expensive: [{
+    relationship: '', // 与本人关系
+    name: '', // 姓名
+    bank: '',    // 任职银行
+    bankDuty: '', // 职务
+    startTime: '',// 任职时间
+    endTime: '',// 任职时间
+    vadish: '', // 有无公款存放其任职银行
   }],
-  // 股票
-  stock: {
-    desc: '',
-    allMarketValue: '', // 总市值
-    list: [{
-      name: '',
-      stockName: '', // 股票名称
-      stockNumber: '', // 股票数量
-      stockMarketValue: ''// 股票市值
-    }]
-  },
-  // 基金
-  fund: {
-    allMarketValue: '', // 总市值
-    list: [{
-      name: '',
-      fundName: '', // 基金名称
-      fundNumber: '', // 基金数量
-      fundMarketValue: ''// 基金市值
-    }]
-  },
-  // 期货
-  futures: {
-    allMarketValue: '', // 总市值
-    list: [{
-      name: '',
-      futuresName: '', // 期货名称
-      futuresNumber: '', // 期货数量
-      futuresMarketValue: ''// 期货市值
-    }]
-  },
-  workingList: [
-    {
-      // employer: '', // 工作单位
-      duty: '' // 现任职务
-      // phone: '' // 联系电话
-    }
-  ],
-  // 人脉关系
+  // 亲属情况
   networking: [
     {
       relationship: '', // 本人关系
       name: '',
       idCard: '',
+      birthday: '', // 生日
       politicsStatus: '', // 政治面貌
-      phone: '',
-      work: ''
+      duty: '', // 现任职务
+      desc: '' // 备注
     }
   ],
-  // 工作考核情况
-  workAssessment: [
-    {
-      time: '', // 年度
-      assessment: '', // 考核情况
-      agency: '', // 发文机关
-      symbol: '', // 文号
-      desc: ''// 备注
-    }
-  ],
-  // 评先评优
-  recommendation: [
-    {
-      time: '',
-      name: '',
-      organization: '', // 表彰机关
-      symbol: '', // 文号
-      desc: ''// 备注
-    }
-  ],
-  // 搜惩处情况
-  punishment: [{
-    time: '',
-    disposition: '', // 所受处分
-    dispositionReasons: '', // 所受处分原因
-    dispositionOrgans: '', // 惩处机关
-    symbol: '', // 文号
-    desc: ''
+  // 房产交易情况
+  homestead: [{
+    source: '', // 房产来源
+    propertyNature: '', // 产权性质
+    type: '',//交易类型
+    address: '', // 具体地址
+    area: '', // 建筑面积
+    transactionTime: '', // 交易时间
+    transactionPrice: '' // 交易价格
   }],
-  // 婚姻情况
-  marriage: [{
-    change: '', // 变化情况
-    time: '',
-    reasons: ''
+  // 本人配偶车辆情况
+  car: [{
+    brand: '', // 品牌
+    time: '', // 购买时间
+    price: '', // 价格
+    carNumber: '', // 车牌号
+    desc: '' // 备注
   }],
   // 出国证件情况
   travelDocuments: [{
@@ -173,98 +151,17 @@ const db = {
     validity: '', // 有效期
     custodyInstitutions: ''// 保管机构
   }],
-  // 出国情况
-  travelAbroad: [{
-    startTime: '',
-    endTime: '',
-    country: '',
-    reasons: '', // 出国事由
-    approvalAuthority: '', // 审批机构
-    agency: ''// 代办机构
-  }],
-  // 子女与无国籍外国人婚姻情况
-  childMarriageForeigners: [{
-    title: '', // 称谓
-    name: '', // 姓名
-    spouseName: '', // 配偶姓名
-    spouseCountry: '', // 配偶姓名国籍
-    spouseWork: '', // 配偶单位
-    spouseDuty: '', // 配偶职位
-    time: ''// 登记时间
-  }],
-  // 子女与台湾婚姻情况
-  childMarriageTaiwan: [{
-    title: '', // 称谓
-    name: '', // 姓名
-    spouseName: '', // 配偶姓名
-    spouseCountry: '', // 配偶姓名国籍
-    spouseWork: '', // 配偶单位
-    spouseDuty: '', // 配偶职位
-    time: ''// 登记时间
-  }],
-  // 配偶子女移居海外
-  childMoved: [{
-    title: '', // 称谓
-    name: '', // 姓名
-    country: '', // 移居国家
-    city: '', // 居住城市
-    card: '', // 移居国家证件号码
-    type: '', // 移居类别
-    time: '', // 移居时间
-    desc: ''
-  }],
-  // 配偶子女从业情况
-  practice: [{
-    title: '', // 称谓
-    name: '', // 姓名
-    isLife: '', // 是否共同生活
-    work: '', // 工作单位
-    duty: '', // 现在职务
-    unitNature: '', // 单位性质
-    cardName: '', // 证件名称
-    card: '' // 证件号码
-  }],
-  // 配偶子女刑事责任情况
-  criminal: [{
-    title: '', // 称谓
-    name: '', // 姓名
-    time: '', // 被追究时间
-    reasons: '', // 被追究责任原因
-    status: '', // 处理阶段
-    result: '' // 处理结果
-  }],
-  // 配偶子女房产情况----本人、配偶、子女的房产情况
-  realEstate: [{
-    people: '', // 产权人
-    relationship: '', // 与本人关系
-    source: '', // 房产来源
-    realEstateCertificate:'', // 不动产权证
-    address: '', // 具体地址
-    area: '', // 建筑面积
-    propertyNature: '', // 产权性质
-    transactionTime: '', // 交易时间
-    transactionPrice: '' // 交易价格
-  }],
-  // 本人配偶注册工商户,个人独资企业或合伙企业
-  partnership: [{
-    title: '', // 称谓
+  // 投资
+  invest: [{
+    people: "",// 持有人
     name: '',
-    creditCode:'', // 统一社会信用代码
-    marketSubject: '', // 市场主体
-    businessScope: '', // 经营范围
-    marketSubjectType: '', // 市场主体类型
-    money: '', // 资金数额
-    personalContribution: '', // 个人出资数额
-    fundedRatio: '' // 出资比例
+    type: '',//财产类型
+    code: '', // 代码
+    num: '', // 数量
+    marketValue: '',// 市值
+    desc: '',// 备注
   }],
-  // 本人配偶车辆情况
-  car: [{
-    brand: '', // 品牌
-    time: '', // 购买时间
-    price: '', // 价格
-    carNumber: '', // 车牌号
-    color: '',
-    desc: '' // 备注
-  }]
+  other: '',// 其他需要说明的
+
 }
 module.exports = db

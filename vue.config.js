@@ -59,12 +59,12 @@ module.exports = {
           installerHeaderIcon: './public/app.ico', // 安装时头部图标
           createDesktopShortcut: true, // 创建桌面图标
           createStartMenuShortcut: true, // 创建开始菜单图标
-          shortcutName: '廉情信息报告表' // 图标名称
+          shortcutName: '廉情卡报告表' // 图标名称
         },
         publish: ['github'],
         copyright: 'Copyright © 2020', // 版权信息
         appId: 'cn.com.watone.app',
-        productName: '廉情信息报告表'
+        productName: '廉情卡报告表'
       }
     },
     // i18n config

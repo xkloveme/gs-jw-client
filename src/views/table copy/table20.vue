@@ -29,62 +29,60 @@
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
+         <template scope="scope" v-else>
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="stockName"
-        label="股票名称或代码"
-        :width="this.$attrs.hiddenOptions ? 200 : null"
-      >
+      <el-table-column prop="fundName" label="基金名称或代码" :width="this.$attrs.hiddenOptions ? 200 : null">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.stockName"
+            v-model.trim="scope.row.fundName"
             size="small"
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
-          <span>{{ scope.row.stockName }}</span>
+         <template scope="scope" v-else>
+          <span >{{ scope.row.fundName }}</span>
         </template>
       </el-table-column>
       <el-table-column
-        prop="stockNumber"
-        label="持股数量"
+        prop="fundNumber"
+        label="基金份额"
         :width="this.$attrs.hiddenOptions ? 200 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
-            v-model.trim="scope.row.stockNumber"
+            v-model.trim="scope.row.fundNumber"
             size="small"
             style="width: 100%"
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
-          <span>{{ scope.row.stockNumber }}</span>
+         <template scope="scope" v-else>
+          <span >{{ scope.row.fundNumber }}</span>
         </template>
       </el-table-column>
       <el-table-column
-        prop="stockMarketValue"
-        label="填报前一交易日市值（万元）"
-        :width="this.$attrs.hiddenOptions ? 200 : null"
+        prop="fundMarketValue"
+        label="填报前一交易日净值（万元）"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
-            v-model.trim="scope.row.stockMarketValue"
-            size="small"
+            v-model.trim="scope.row.fundMarketValue"
             @change="inputChange"
+            size="small"
             style="width: 100%"
             placeholder="请输入内容"
           />
         </template>
         <template scope="scope" v-else>
-          <span>{{ scope.row.stockMarketValue }}</span>
+        <span >{{scope.row.fundMarketValue}}</span>
         </template>
       </el-table-column>
-      <div slot="append" style="cursor: pointer; line-height: 30px">
+      <div
+        slot="append"
+        style="cursor: pointer; line-height: 30px"
+      >
         <div
           style="
             text-align: right;
@@ -92,33 +90,16 @@
             padding: 5px;
           "
         >
-          填报前一交易日所有股票的总市值（万元）
+          填报前一交易日所有基金的总净值（万元）
           <el-input-number
             v-model.trim="allMarketValue"
             v-if="!this.$attrs.hiddenOptions"
+            size="small"
             @change="inputChange"
-            size="small"
             style="width: 400px"
             placeholder="请输入内容"
           />
-          <span v-else>{{ allMarketValue }}</span>
-        </div>
-        <div
-          style="
-            text-align: right;
-            border-bottom: 1px solid #ebeef5;
-            padding: 5px;
-          "
-        >
-          备注
-          <el-input
-            v-model.trim="desc"
-            size="small"
-            v-if="!this.$attrs.hiddenOptions"
-            style="width: 400px"
-            placeholder="请输入内容"
-          />
-          <span v-else>{{ desc }}</span>
+           <span v-else>{{allMarketValue}}</span>
         </div>
         <div
           style="text-align: center"
@@ -155,28 +136,15 @@ export default {
     return {}
   },
   computed: {
-    tableData: {
-      get: function () {
-        return this.$store.getters.getStock.list
-      },
-      set: function (newValue) {
-        this.$store.dispatch('updateStockList', newValue)
-      },
+    tableData() {
+      return this.$store.getters.getFund.list
     },
     allMarketValue: {
       get: function () {
-        return this.$store.getters.getStock.allMarketValue
+        return this.$store.getters.getFund.allMarketValue
       },
       set: function (newValue) {
-        this.$store.dispatch('updateStockAllMarketValue', newValue)
-      },
-    },
-    desc: {
-      get: function () {
-        return this.$store.getters.getStock.desc
-      },
-      set: function (newValue) {
-        this.$store.dispatch('updateStockDesc', newValue)
+        this.$store.dispatch('updateFundAllMarketValue', newValue)
       },
     },
   },
@@ -206,20 +174,19 @@ export default {
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '17')
+      this.$store.dispatch('updateStatusSubtract', '18')
     },
     // 清空
     handleEmpty() {
       this.$store.dispatch('updateUser', {
-        stock: {
-          desc: '',
+        fund: {
           allMarketValue: '', // 总市值
           list: [
             {
               name: '',
-              stockName: '', // 股票名称
-              stockNumber: '', // 股票数量
-              stockMarketValue: '', // 股票市值
+              fundName: '', // 基金名称
+              fundNumber: '', // 基金数量
+              fundMarketValue: '', // 基金市值
             },
           ],
         },
@@ -231,20 +198,20 @@ export default {
         let arr = []
         this.tableData.map((item) => {
           arr.push(item.name)
-          arr.push(item.stockName)
-          arr.push(item.stockNumber > 0)
-          arr.push(item.stockMarketValue > 0)
+          arr.push(item.fundName)
+          arr.push(item.fundNumber > 0)
+          arr.push(item.fundMarketValue > 0)
         })
         if (!arr.every((x) => x)) {
           return this.$message({
             type: 'error',
-            message: '请检查持有人姓名、股票名称、持股数量、股票市值是否有误',
+            message: '请检查持有人姓名、基金名称、基金数量、基金市值是否有误',
           })
         }
-        this.$store.dispatch('updateStatus', '19')
+        this.$store.dispatch('updateStatus', '20')
         console.log(this.tableStatus)
       } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '19')
+        this.$store.dispatch('updateStatus', '20')
       } else if (this.tableStatus === '') {
         return this.$message({
           type: 'error',
@@ -255,9 +222,9 @@ export default {
     handleAddLine() {
       this.tableData.push({
         name: '',
-        stockName: '', // 股票名称
-        stockNumber: '', // 持股数量
-        stockMarketValue: '', // 股票市值
+        fundName: '', // 基金名称
+        fundNumber: '', // 基金数量
+        fundMarketValue: '', // 基金市值
       })
     },
   },

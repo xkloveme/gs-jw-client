@@ -77,7 +77,7 @@ function createWindow () {
       // preload: './preload.js'
     },
     // eslint-disable-next-line no-undef
-    icon: `${__static}/app.ico`,
+    icon: `../public/app.ico`,
     frame: false
   })
 
@@ -157,7 +157,7 @@ function createMenu () {
 // 创建系统托盘 / create tray
 function createTray (trayMenu) {
   // eslint-disable-next-line no-undef
-  tray = new Tray(`${__static}/app.ico`)
+  tray = new Tray(`../public/app.ico`)
 
   tray.setToolTip('运行中！\nStill Working!')
   tray.setContextMenu(trayMenu)

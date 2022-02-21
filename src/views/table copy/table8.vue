@@ -1,11 +1,13 @@
 <template>
   <div>
+     <!-- <p>
+8.1、子女与外国人、无国籍人通婚的情况
+      </p> -->
     <el-table
       :data="tableData"
       v-show="tableStatus !== '2'"
       class="tb-edit"
       :border="!this.$attrs.hiddenOptions"
-      style="width: 100%"
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
@@ -58,7 +60,7 @@
           />
         </template>
       </el-table-column>
-      <el-table-column prop="spouseCountry" label="配偶地区" :width="this.$attrs.hiddenOptions ? 100 : null">
+      <el-table-column prop="spouseCountry" label="配偶国籍(地区)" :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.spouseCountry"
@@ -117,6 +119,7 @@
         添加一行
       </div>
     </el-table>
+    <!-- <table82 :tableStatus="tableStatus" v-bind="$attrs"/> -->
     <el-row type="flex" style="margin: 30px" justify="center" v-if="!this.$attrs.hiddenOptions">
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>
@@ -126,6 +129,7 @@
 </template>
 
 <script>
+// import table82 from './table8-2.vue'
 export default {
   props: {
     tableStatus: {
@@ -133,16 +137,18 @@ export default {
       default: '',
     },
   },
+  // components:{table82},
   data() {
     return {}
   },
   computed: {
     tableData() {
-      return this.$store.getters.getChildMarriageTaiwan
+      return this.$store.getters.getChildMarriageForeigners
     },
   },
   methods: {
     handleDelete(index, row) {
+      //  this.tableData.splice(index, 1)
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
       } else {
@@ -154,12 +160,12 @@ export default {
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '7')
+      this.$store.dispatch('updateStatusSubtract', '6')
     },
     // 清空
     handleEmpty() {
       this.$store.dispatch('updateUser', {
-        childMarriageTaiwan: [
+        childMarriageForeigners: [
           {
             title: '', // 称谓
             name: '', // 姓名
@@ -192,10 +198,10 @@ export default {
               '请检查称谓、姓名、配偶姓名、配偶国籍、配偶单位、配偶职务、登记时间是否有误',
           })
         }
-        this.$store.dispatch('updateStatus', '9')
+        this.$store.dispatch('updateStatus', '8')
         console.log(this.tableStatus)
       } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '9')
+        this.$store.dispatch('updateStatus', '8')
       } else if (this.tableStatus === '') {
         return this.$message({
           type: 'error',

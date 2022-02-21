@@ -18,72 +18,86 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="startTime"
-        label="起止日期(起)"
+        prop="name"
+        label="证件名称"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-date-picker
-            v-model.trim="scope.row.startTime"
-            style="width: 150px"
-            type="date"
-            value-format="timestamp"
-            placeholder="选择时间"
-          />
+          <el-select v-model="scope.row.name" placeholder="请选择">
+            <el-option
+              v-for="item in $utils.identification"
+              :key="item.key"
+              :label="item.value"
+              :value="item.key"
+            />
+          </el-select>
         </template>
         <template scope="scope" v-else>{{
-          scope.row.startTime | dateDay
+          scope.row.name | filterSelect($utils.identification)
         }}</template>
       </el-table-column>
       <el-table-column
-        prop="endTime"
-        label="起止日期(止)"
+        prop="number"
+        label="证件号码"
+        :width="this.$attrs.hiddenOptions ? 150 : 180"
+      >
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+          <el-input
+            v-model.trim="scope.row.number"
+            size="small"
+            placeholder="请输入内容"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column prop="licensing" label="发证机关" :width="this.$attrs.hiddenOptions ? 100 : null">
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+          <el-input
+            v-model.trim="scope.row.licensing"
+            size="small"
+            placeholder="请输入内容"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="time"
+        label="发证时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
-            v-model.trim="scope.row.endTime"
-            style="width: 150px"
+            v-model.trim="scope.row.time"
+            style="width: 100%"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
         </template>
         <template scope="scope" v-else>{{
-          scope.row.endTime | dateDay
+          scope.row.time | dateDay
         }}</template>
       </el-table-column>
-      <el-table-column prop="country" label="所到国家(地区)" :width="this.$attrs.hiddenOptions ? 100 : null">
+      <el-table-column
+        prop="validity"
+        label="有效期"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            v-model.trim="scope.row.country"
-            size="small"
+          <el-date-picker
+            v-model.trim="scope.row.validity"
+            style="width: 100%"
+            type="date"
+            value-format="timestamp"
             placeholder="请输入内容"
           />
         </template>
+        <template scope="scope" v-else>{{
+          scope.row.validity | dateDay
+        }}</template>
       </el-table-column>
-      <el-table-column prop="reasons" label="出国(境)事由" :width="this.$attrs.hiddenOptions ? 150 : null">
+      <el-table-column prop="custodyInstitutions" label="保管机构">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.reasons"
-            size="small"
-            placeholder="请输入内容"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column prop="approvalAuthority" label="审批机构" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            v-model.trim="scope.row.approvalAuthority"
-            size="small"
-            placeholder="请输入内容"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column prop="agency" label="委托代办机构" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            v-model.trim="scope.row.agency"
+            v-model.trim="scope.row.custodyInstitutions"
             size="small"
             placeholder="请输入内容"
           />
@@ -113,6 +127,7 @@
 </template>
 
 <script>
+import { isIdentityCard } from '../../common.js'
 export default {
   props: {
     tableStatus: {
@@ -125,7 +140,7 @@ export default {
   },
   computed: {
     tableData() {
-      return this.$store.getters.getTravelAbroad
+      return this.$store.getters.getTravelDocuments
     },
   },
   methods: {
@@ -141,19 +156,19 @@ export default {
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '5')
+      this.$store.dispatch('updateStatusSubtract', '4')
     },
     // 清空
     handleEmpty() {
       this.$store.dispatch('updateUser', {
-        travelAbroad: [
+        travelDocuments: [
           {
-            startTime: '',
-            endTime: '',
-            country: '',
-            reasons: '', // 出国事由
-            approvalAuthority: '', // 审批机构
-            agency: '', // 代办机构
+            name: '', // 证件名称
+            number: '', // 证件号码
+            licensing: '', // 发证机关
+            time: '', // 发证时间
+            validity: '', // 有效期
+            custodyInstitutions: '', // 保管机构
           },
         ],
       })
@@ -163,24 +178,24 @@ export default {
       if (this.tableStatus === '1') {
         let arr = []
         this.tableData.map((item) => {
-          arr.push(item.startTime)
-          arr.push(item.endTime)
-          arr.push(item.country)
-          arr.push(item.reasons)
-          arr.push(item.approvalAuthority)
-          arr.push(item.agency)
+          arr.push(item.name)
+          arr.push(item.licensing)
+          arr.push(item.time)
+          arr.push(item.validity)
+          arr.push(item.custodyInstitutions)
+          arr.push(item.number)
         })
         if (!arr.every((x) => x)) {
           return this.$message({
             type: 'error',
             message:
-              '请检查日期、所到国家、出境事由、审批机构、委托代办机构是否有误',
+              '请检查证件名称、证件号码、发证机关、发证时间、有效期、保管机构是否有误',
           })
         }
-        this.$store.dispatch('updateStatus', '7')
+        this.$store.dispatch('updateStatus', '6')
         console.log(this.tableStatus)
       } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '7')
+        this.$store.dispatch('updateStatus', '6')
       } else if (this.tableStatus === '') {
         return this.$message({
           type: 'error',
@@ -190,12 +205,12 @@ export default {
     },
     handleAddLine() {
       this.tableData.push({
-        startTime: '',
-        endTime: '',
-        country: '',
-        reasons: '', // 出国事由
-        approvalAuthority: '', // 审批机构
-        agency: '', // 代办机构
+        name: '', // 证件名称
+        number: '', // 证件号码
+        licensing: '', // 发证机关
+        time: '', // 发证时间
+        validity: '', // 有效期
+        custodyInstitutions: '', // 保管机构
       })
     },
   },

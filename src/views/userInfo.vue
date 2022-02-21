@@ -333,8 +333,8 @@
           <resume :hiddenOptions="false" />
         </el-form-item>
         <el-form-item>
-          <el-button @click="onSubmit"
-            type="primary">打印预览</el-button>
+          <!-- <el-button @click="onSubmit"
+            type="primary">打印预览</el-button> -->
           <el-button @click="handleGoNextPage">下一项</el-button>
         </el-form-item>
       </el-form>
