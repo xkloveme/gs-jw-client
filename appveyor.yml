@@ -1,0 +1,31 @@
+version: 0.1.{build}
+
+branches:
+  only:
+    - master
+
+image: Visual Studio 2019
+platform: Any CPU
+environment:
+  GH_TOKEN:
+    secure: CJZQSFYb6hznFeHrsHhy0H/BMHKXeisja4miv7OGlJbqCz0kRtOoU2wWAhx91BRl
+cache:
+  - node_modules
+  - '%APPDATA%\npm-cache'
+  - '%USERPROFILE%\.electron'
+
+
+init:
+  - git config --global core.autocrlf input
+
+install:
+  - ps: Install-Product node 14 x64
+  - git reset --hard HEAD
+  - npm install
+  - node --version
+
+build_script:
+  - yarn build
+  - yarn packapp
+
+test: off
