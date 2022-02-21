@@ -3,7 +3,7 @@
     <el-table
       :data="tableData"
       class="tb-edit"
-      v-show="tableStatus !== '2'"
+      v-show="tableStatus == '1'"
       :border="!this.$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row

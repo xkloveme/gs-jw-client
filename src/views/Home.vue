@@ -22,6 +22,8 @@
           v-model="tableStatus[item.content]">有此类情况</el-radio>
         <el-radio label="2"
           v-model="tableStatus[item.content]">无此类情况</el-radio>
+                  <el-radio label="3"
+          v-model="tableStatus[item.content]">无变化</el-radio>
       </p>
       <div style="color:red;margin:10px 0px;">
         {{item.note}}

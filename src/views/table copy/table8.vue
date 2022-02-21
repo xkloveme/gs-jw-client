@@ -5,7 +5,7 @@
       </p> -->
     <el-table
       :data="tableData"
-      v-show="tableStatus !== '2'"
+      v-show="tableStatus == '1'"
       class="tb-edit"
       :border="!this.$attrs.hiddenOptions"
       highlight-current-row

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-table :data="tableData"
-      v-show="tableStatus !== '2'"
+      v-show="tableStatus == '1'"
       :border="!this.$attrs.hiddenOptions"
       class="tb-edit"
       highlight-current-row

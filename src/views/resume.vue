@@ -41,22 +41,26 @@
       label="单位"
       :width="this.$attrs.hiddenOptions ? '' : 180"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select
-     v-model="scope.row.unitName"
-    filterable
-    allow-create
-    default-first-option
-     @change="changeValue1($event, scope.$index)"
-    placeholder="请选择单位">
-    <el-option
+      <!-- <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <el-select
+          v-model="scope.row.unitName"
+          filterable
+          allow-create
+          default-first-option
+          @change="changeValue1($event, scope.$index)"
+          placeholder="请选择单位"
+        >
+          <el-option
             v-for="(item, index) in uniNameList"
             :key="index"
             :label="item"
             :value="item"
           >
           </el-option>
-  </el-select>
+        </el-select>
+      </template> -->
+       <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <el-input v-model.trim="scope.row.unitName" size="small" placeholder="请输入单位" />
       </template>
     </el-table-column>
     <el-table-column
@@ -64,12 +68,14 @@
       label="科室"
       :width="this.$attrs.hiddenOptions ? '' : 180"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-select v-model="scope.row.department"
+      <!-- <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <el-select
+          v-model="scope.row.department"
           filterable
-    allow-create
-    default-first-option
-         placeholder="请选择科室">
+          allow-create
+          default-first-option
+          placeholder="请选择科室"
+        >
           <el-option
             v-for="(item, index) in obj[scope.row.unitName]"
             :key="index"
@@ -78,6 +84,9 @@
           >
           </el-option>
         </el-select>
+      </template> -->
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <el-input v-model.trim="scope.row.department" size="small" placeholder="请输入科室" />
       </template>
     </el-table-column>
     <el-table-column
@@ -86,11 +95,7 @@
       :width="this.$attrs.hiddenOptions ? '' : null"
     >
       <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-input
-          v-model.trim="scope.row.job"
-          size="small"
-          placeholder="请输入职务"
-        />
+        <el-input v-model.trim="scope.row.job" size="small" placeholder="请输入职务" />
       </template>
     </el-table-column>
     <div
@@ -170,12 +175,12 @@ export default {
     },
     handleAddLine() {
       this.tableData.push({
-        time: "",
-        startTime: "", //开始时间
-        endTime: "", //结束时间
-        unitName: "", //单位
-        department: "", // 科室
-        job: "", // 职务
+        time: [],
+    startTime: '',//开始时间
+    endTime: '',//结束时间
+    unitName: '',//单位
+    department: '', // 科室
+    job: ''// 职务
       });
     },
   },

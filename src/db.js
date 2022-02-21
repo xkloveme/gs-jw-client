@@ -6,6 +6,7 @@
 const db = {
   uid: '', // 生成数据表唯一id
   version: '', // 版本号
+  password:'',
   name: '', // 姓名
   gender: '', // 性别
   idCard: '', // 身份证号
@@ -162,6 +163,6 @@ const db = {
     desc: '',// 备注
   }],
   other: '',// 其他需要说明的
-
+  tableStatus: {},
 }
 module.exports = db
