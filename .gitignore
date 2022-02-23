@@ -16,7 +16,6 @@ yarn-error.log*
 .idea
 .vscode
 .nova
-.github
 *.suo
 *.ntvs*
 *.njsproj
