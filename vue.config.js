@@ -62,7 +62,8 @@ module.exports = {
           shortcutName: '廉情卡报告表' // 图标名称
         },
         publish: ['github'],
-        copyright: 'Copyright © 2020', // 版权信息
+        "repository": "github:xkloveme/git@github.com:xkloveme/gs-jw-client.git",
+        copyright: 'Copyright © 2022', // 版权信息
         appId: 'cn.com.watone.app',
         productName: '廉情卡报告表'
       }

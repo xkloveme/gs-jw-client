@@ -43,7 +43,7 @@
         </template>
         <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
-      <el-table-column prop="money" label="金额">
+      <el-table-column prop="money" label="金额(万)">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
             <el-input-number
             v-model.trim="scope.row.money"
