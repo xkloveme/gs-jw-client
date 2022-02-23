@@ -6,7 +6,8 @@
 const db = {
   uid: '', // 生成数据表唯一id
   version: '', // 版本号
-  password:'',
+  password:'', // 密码
+  checkPassword:'', // 确认密码
   name: '', // 姓名
   gender: '', // 性别
   idCard: '', // 身份证号
@@ -25,7 +26,8 @@ const db = {
   spouseName: "",//配偶信息姓名
   spouseIdCard: '', // 配偶信息身份证号
   spousePhone: '', // 配偶信息手机号
-  spousedDuty: '', // 配偶信息单位及职务
+  spousedEmployer: '', // 配偶信息工作单位
+  spousedDuty: '', // 配偶信息职务
   spouseYearIncome: '', // 配偶信息年度收入
   resume: [{
     time: [],
@@ -55,8 +57,7 @@ const db = {
   }],
   // 个人因公出国考察(培训)和因私出国(境)情况  // 出国情况
   travelAbroad: [{
-    startTime: '',
-    endTime: '',
+    time: '',
     address: '',//地点
     money: '',//费用来由
     reasons: '', // 出国事由
@@ -64,8 +65,7 @@ const db = {
   // 配偶、子女及其配偶出国(境)工作、留学、移(定)居情况
   childMoved: [{
     title: '', // 称谓
-    startTime: '',
-    endTime: '',
+    time: '',
     address: '',//地点
     money: '',//费用来由
     reasons: '', // 出国事由
@@ -84,9 +84,18 @@ const db = {
     money: '',//金额
     vadish: '',//是否管理服务对象及其亲
   }],
-  // 本人、配偶、子女及其配偶注册个体工商户、个人独资企业或者合伙企业的情况
+  // 本人、配偶、子女及其配偶投资非上市公司、企业的情况
   partnership: [{
-    name: '',
+    title: '',
+    businessScope: '', // 经营范围
+    marketSubjectType: '', // 企业性质
+    money: '', // 注册资金
+    personalContribution: '', // 投资金额
+    fundedRatio: '' // 出资比例
+  }],
+  // 本人、配偶、子女及其配偶注册个体工商户、个人独资企业或者合伙企业的情况
+  partnershipListed: [{
+    title: '',
     businessScope: '', // 经营范围
     marketSubjectType: '', // 企业性质
     money: '', // 注册资金
@@ -95,17 +104,16 @@ const db = {
   }],
   // 配偶、子女及其配偶在银行任职情况(银行名称、所任职务、任职时间)
   bank: [{
-    relationship: '', // 与本人关系
+    title: '', // 与本人关系
     name: '', // 姓名
     bank: '',    // 任职银行
     bankDuty: '', // 职务
-    startTime: '',// 任职时间
-    endTime: '',// 任职时间
+    time: '',// 任职时间
     vadish: '', // 有无公款存放其任职银行
   }],
   // 利用名贵特产类特殊资源谋取私立问题：违规公款购买、收送、占用、插手干预，本人或配偶子女及其配偶、特定关系人违规参与经营等情况
   expensive: [{
-    relationship: '', // 与本人关系
+    title: '', // 与本人关系
     name: '', // 姓名
     bank: '',    // 任职银行
     bankDuty: '', // 职务
@@ -121,7 +129,7 @@ const db = {
       idCard: '',
       birthday: '', // 生日
       politicsStatus: '', // 政治面貌
-      duty: '', // 现任职务
+      work: '', // 现任职务
       desc: '' // 备注
     }
   ],
@@ -147,9 +155,9 @@ const db = {
   travelDocuments: [{
     name: '', // 证件名称
     number: '', // 证件号码
-    licensing: '', // 发证机关
     time: '', // 发证时间
-    validity: '', // 有效期
+    startTime: '',//证件有效期起
+    endTime: '',//证件有效期止
     custodyInstitutions: ''// 保管机构
   }],
   // 投资

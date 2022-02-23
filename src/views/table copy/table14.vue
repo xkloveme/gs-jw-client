@@ -22,7 +22,7 @@
         <template scope="scope"
           v-if="!this.$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.people"
-            size="small"
+            size="mini"
             placeholder="请输入内容" />
         </template>
       </el-table-column>
@@ -32,7 +32,7 @@
         <template scope="scope"
           v-if="!this.$attrs.hiddenOptions">
           <el-input placeholder="请输入内容"
-            size="small"
+            size="mini"
             v-model.trim="scope.row.caseNo" />
         </template>
       </el-table-column>
@@ -79,7 +79,7 @@
         <template scope="scope"
           v-if="!this.$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.address"
-            size="small"
+            size="mini"
             placeholder="请输入内容" />
         </template>
       </el-table-column>
@@ -89,7 +89,7 @@
         <template scope="scope"
           v-if="!this.$attrs.hiddenOptions">
           <el-input-number v-model.trim="scope.row.area"
-            size="small"
+            size="mini"
             style="width: 100%"
             placeholder="请输入内容" />
         </template>
@@ -136,7 +136,7 @@
         <template scope="scope"
           v-if="!this.$attrs.hiddenOptions">
           <el-input-number v-model.trim="scope.row.transactionPrice"
-            size="small"
+            size="mini"
             style="width: 100%"
             placeholder="请输入内容" />
         </template>
@@ -232,7 +232,7 @@ export default {
         }
         this.$store.dispatch('updateStatus', '17')
         console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
+      } else if (this.tableStatus === '2'||this.tableStatus === '3') {
         this.$store.dispatch('updateStatus', '17')
       } else if (this.tableStatus === '') {
         return this.$message({

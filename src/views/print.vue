@@ -25,12 +25,12 @@ import table13 from './table/table13'
 import table14 from './table/table14'
 import table15 from './table/table15'
 import table16 from './table/table16'
-import table17 from './table/table17'
-import table18 from './table/table18'
-import table19 from './table/table19'
-import table20 from './table/table20'
-import table21 from './table/table21'
-import table22 from './table/table22'
+// import table17 from './table/table17'
+// import table18 from './table/table18'
+// import table19 from './table/table19'
+// import table20 from './table/table20'
+// import table21 from './table/table21'
+// import table22 from './table/table22'
 export default {
   components: {
     // userInfo,
@@ -50,12 +50,12 @@ export default {
     table14,
     table15,
     table16,
-    table17,
-    table18,
-    table19,
-    table20,
-    table21,
-    table22,
+    // table17,
+    // table18,
+    // table19,
+    // table20,
+    // table21,
+    // table22,
   },
   data() {
     return {

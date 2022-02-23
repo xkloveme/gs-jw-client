@@ -1,140 +1,26 @@
 <template>
   <div>
-    <el-table
-      :data="tableData"
-      v-show="tableStatus == '1'"
-      :border="!this.$attrs.hiddenOptions"
-      class="tb-edit"
-      highlight-current-row
-      style="width: 100%"
+    <el-input
+      v-model.trim="other"
+      type="textarea"
+      :rows="20"
+      maxlength="1000"
+      show-word-limit
+      placeholder="请输入内容"
+    />
+    <el-row
+      type="flex"
+      style="margin: 30px; flex-direction: column; align-items: center"
+      justify="center"
+      v-if="!this.$attrs.hiddenOptions"
     >
-      <el-table-column
-        label="操作"
-        prop="agency"
-        v-if="!this.$attrs.hiddenOptions"
-      >
-        <template scope="scope">
-          <i
-            @click="handleDelete(scope.$index, scope.row)"
-            class="el-icon-delete"
-            style="color: #f56c6c"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="称谓" prop="title" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select placeholder="请选择" v-model="scope.row.title">
-            <el-option
-              :key="item.key"
-              :label="item.value"
-              :value="item.key"
-              v-for="item in $utils.relationshipWithMyself"
-            />
-          </el-select>
-        </template>
-        <template scope="scope" v-else>{{
-          scope.row.title | filterSelect($utils.relationshipWithMyself)
-        }}</template>
-      </el-table-column>
-      <el-table-column label="姓名" prop="name" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            placeholder="请输入内容"
-            size="small"
-            v-model.trim="scope.row.name"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="统一社会信用代码" prop="creditCode" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            placeholder="请输入内容"
-            size="small"
-            v-model.trim="scope.row.creditCode"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="市场主体名称" prop="marketSubject" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            placeholder="请输入内容"
-            size="small"
-            v-model.trim="scope.row.marketSubject"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="经营范围(业务范围)"
-        prop="businessScope"
-        :width="this.$attrs.hiddenOptions ? 80 : 180"
-      >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            placeholder="请输入内容"
-            size="small"
-            v-model.trim="scope.row.businessScope"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="市场主体类型" prop="marketSubjectType" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select placeholder="请选择" v-model="scope.row.marketSubjectType">
-            <el-option
-              :key="item.key"
-              :label="item.value"
-              :value="item.key"
-              v-for="item in $utils.marketEntities"
-            />
-          </el-select>
-        </template>
-        <template scope="scope" v-else>{{
-          scope.row.marketSubjectType | filterSelect($utils.marketEntities)
-        }}</template>
-      </el-table-column>
-      <el-table-column label="资金数额(出资额)(万元)" prop="money" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input-number
-            placeholder="请输入"
-            size="small"
-            style="width: 100%"
-            v-model.trim="scope.row.money"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="个人出资额(万)"
-        prop="personalContribution"
-        :width="this.$attrs.hiddenOptions ? 80 : null"
-      >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input-number
-            placeholder="请输入"
-            size="small"
-            style="width: 100%"
-            v-model.trim="scope.row.personalContribution"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="出资比例(%)" prop="fundedRatio">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input-number
-            placeholder="请输入"
-            size="small"
-            style="width: 100%"
-            v-model.trim="scope.row.fundedRatio"
-          />
-        </template>
-      </el-table-column>
-      <div
-        @click="handleAddLine"
-        slot="append"
-        style="cursor: pointer; line-height: 30px; text-align: center"
-        v-if="!this.$attrs.hiddenOptions"
-      >
-        <i class="el-icon-circle-plus-outline" />
-        添加一行
+      <h1>本人承诺</h1>
+      <div style="color: red">
+        每项表格下方的填表说明，本人已认真阅读并按要求填报。所填相关内容已与配偶、子女进行认真核实。我郑重承诺，以上所填内容真实、准确、完整，如有存在瞒报、漏报、虚报情形，自愿接受组织审查和处理。
       </div>
-    </el-table>
+      <el-checkbox v-model="checked">我已知晓,并同意</el-checkbox>
+    </el-row>
+
     <el-row
       type="flex"
       style="margin: 30px"
@@ -143,109 +29,117 @@
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>
-      <el-button @click="handleGoNextPage">下一项</el-button>
+      <el-button @click="handleGoNextPage">导出</el-button>
     </el-row>
   </div>
+  <!-- <el-button @click="onSubmit" type="primary">提交</el-button> -->
 </template>
 
 <script>
+var JSZip = require("jszip");
+// const fs = require('fs')
 export default {
   props: {
     tableStatus: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   data() {
-    return {}
+    return {
+      checked: false,
+    };
   },
   computed: {
-    tableData() {
-      return this.$store.getters.getPartnership
+    form() {
+      return this.$store.getters.getUser;
+    },
+    id() {
+      return this.$formatDay(new Date(), "YYYYMMDDHHmmss") + this.form.idCard.slice(-8);
+    },
+    other: {
+      get: function () {
+        return this.$store.getters.getOther;
+      },
+      set: function (newValue) {
+        this.$store.dispatch("updateOther", newValue);
+      },
     },
   },
   methods: {
-    handleDelete(index, row) {
-      if (this.tableData.length > 1) {
-        this.tableData.splice(index, 1)
-      } else {
-        this.$message({
-          type: 'info',
-          message: '已经是最后一个了,不能再删了',
-        })
+    onSubmit() {
+      if (!this.checked)
+        return this.$message({
+          type: "error",
+          message: "请勾选本人承诺",
+        });
+      // this.$emit('onSubmit')
+      const self = this;
+      // 初始化一个zip打包对象
+      var zip = new JSZip();
+      this.$store.dispatch("updateUid", this.id);
+      this.$store.dispatch("updateVersion", this.$version);
+      // 创建一个被用来打包的文件
+      zip.file("user.json", JSON.stringify(this.form));
+      if (this.form.password) {
+        zip.file("password", this.form.password);
       }
+      // 创建一个名为images的新的文件目录
+      // var img = zip.folder('images')
+      // 这个images文件目录中创建一个base64数据为imgData的图像，图像名是smile.gif
+      // img.file('smile.gif', imgData, { base64: true })
+      // 把打包内容异步转成blob二进制格式
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        var filename =
+          self.$formatDay(new Date(), "YYYY年MM月DD日HH时mm分ss") +
+          self.form.name +
+          self.form.idCard +
+          ".wt";
+        // 创建隐藏的可下载链接
+        var eleLink = document.createElement("a");
+        eleLink.download = filename;
+        eleLink.style.display = "none";
+        // 下载内容转变成blob地址
+        eleLink.href = URL.createObjectURL(content);
+        // 触发点击
+        document.body.appendChild(eleLink);
+        eleLink.click();
+        // 然后移除
+        document.body.removeChild(eleLink);
+      });
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '12')
+      this.$store.dispatch("updateStatusSubtract");
     },
     // 清空
     handleEmpty() {
-      this.$store.dispatch('updateUser', {
-        partnership: [
-          {
-            title: '', // 称谓
-            name: '',
-            creditCode:'', // 统一社会信用代码
-            marketSubject: '', // 市场主体
-            businessScope: '', // 经营范围
-            marketSubjectType: '', // 市场主体类型
-            money: '', // 资金数额
-            personalContribution: '', // 个人出资数额
-            fundedRatio: '', // 出资比例
-          },
-        ],
-      })
+      this.$store.dispatch("updateUser", {
+        other: "",
+      });
     },
     // 下一项
     handleGoNextPage() {
-      if (this.tableStatus === '1') {
-        let arr = []
-        this.tableData.map((item) => {
-          arr.push(item.title)
-          arr.push(item.name)
-          arr.push(item.creditCode)
-          arr.push(item.marketSubject)
-          arr.push(item.businessScope)
-          arr.push(item.marketSubjectType)
-          arr.push(item.money > 0)
-          arr.push(item.personalContribution > 0)
-          arr.push(item.fundedRatio > 0)
-        })
-        if (!arr.every((x) => x)) {
+      if (this.tableStatus === "1") {
+        if (!this.other) {
           return this.$message({
-            type: 'error',
-            message:
-              '请检查称谓、姓名、统一社会信用代码、市场主体、经营范围、市场主体类型、资金数额、个人出资数额、出资比例是否有误',
-          })
+            type: "error",
+            message: "请检查填写内容是否有误",
+          });
         }
-        this.$store.dispatch('updateStatus', '14')
-        console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '14')
-      } else if (this.tableStatus === '') {
+        this.onSubmit();
+        console.log(this.tableStatus);
+      } else if (this.tableStatus === "2" || this.tableStatus === "3") {
+        this.onSubmit();
+      } else if (this.tableStatus === "") {
         return this.$message({
-          type: 'error',
-          message: '请检查是否选择有无此类情况',
-        })
+          type: "error",
+          message: "请检查是否选择有无此类情况",
+        });
       }
     },
-    handleAddLine() {
-      this.tableData.push({
-        title: '', // 称谓
-        name: '',
-        creditCode:'', // 统一社会信用代码
-        marketSubject: '', // 市场主体
-        businessScope: '', // 经营范围
-        marketSubjectType: '', // 市场主体类型
-        money: '', // 资金数额
-        personalContribution: '', // 个人出资数额
-        fundedRatio: '', // 出资比例
-      })
-    },
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

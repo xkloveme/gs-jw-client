@@ -59,8 +59,12 @@
           </el-option>
         </el-select>
       </template> -->
-       <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-input v-model.trim="scope.row.unitName" size="small" placeholder="请输入单位" />
+      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <el-input
+          v-model.trim="scope.row.unitName"
+          size="mini"
+          placeholder="请输入单位"
+        />
       </template>
     </el-table-column>
     <el-table-column
@@ -85,8 +89,12 @@
           </el-option>
         </el-select>
       </template> -->
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-input v-model.trim="scope.row.department" size="small" placeholder="请输入科室" />
+      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <el-input
+          v-model.trim="scope.row.department"
+          size="mini"
+          placeholder="请输入科室"
+        />
       </template>
     </el-table-column>
     <el-table-column
@@ -95,7 +103,7 @@
       :width="this.$attrs.hiddenOptions ? '' : null"
     >
       <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-input v-model.trim="scope.row.job" size="small" placeholder="请输入职务" />
+        <el-input v-model.trim="scope.row.job" size="mini" placeholder="请输入职务" />
       </template>
     </el-table-column>
     <div
@@ -139,17 +147,16 @@ export default {
       });
       this.obj = obj;
       this.uniNameList = arr;
-      console.log(this.uniNameList, this.obj, "this.uniNameList");
     },
     changeValue1(val, index) {
       this.tableData[index].department = "";
-      console.log(val, index, this.tableData, "88888");
+      // console.log(val, index, this.tableData, "88888");
       // let obj = {}
       // this.$utils.unitNamelist.map((comm) => {
       //   obj[comm.key] = comm.value
       // })
       // this.departmentList = obj[val]
-      console.log(val, this.departmentList, "5555");
+      // console.log(val, this.departmentList, "5555");
     },
     handleDelete(index, row) {
       if (this.tableData.length > 1) {
@@ -162,7 +169,6 @@ export default {
       }
     },
     changeValue(value) {
-      console.log(value, "999");
       let arr = [];
       this.tableData.map((item) => {
         if (value && value.length) {
@@ -176,11 +182,11 @@ export default {
     handleAddLine() {
       this.tableData.push({
         time: [],
-    startTime: '',//开始时间
-    endTime: '',//结束时间
-    unitName: '',//单位
-    department: '', // 科室
-    job: ''// 职务
+        startTime: "", //开始时间
+        endTime: "", //结束时间
+        unitName: "", //单位
+        department: "", // 科室
+        job: "", // 职务
       });
     },
   },

@@ -25,7 +25,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -41,7 +41,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.stockName"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -57,7 +57,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             v-model.trim="scope.row.stockNumber"
-            size="small"
+            size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
@@ -73,7 +73,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             v-model.trim="scope.row.stockMarketValue"
-            size="small"
+            size="mini"
             @change="inputChange"
             style="width: 100%"
             placeholder="请输入内容"
@@ -96,7 +96,7 @@
             v-model.trim="allMarketValue"
             v-if="!this.$attrs.hiddenOptions"
             @change="inputChange"
-            size="small"
+            size="mini"
             style="width: 400px"
             placeholder="请输入内容"
           />
@@ -112,7 +112,7 @@
           备注
           <el-input
             v-model.trim="desc"
-            size="small"
+            size="mini"
             v-if="!this.$attrs.hiddenOptions"
             style="width: 400px"
             placeholder="请输入内容"
@@ -242,7 +242,7 @@ export default {
         }
         this.$store.dispatch('updateStatus', '19')
         console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
+      } else if (this.tableStatus === '2'||this.tableStatus === '3') {
         this.$store.dispatch('updateStatus', '19')
       } else if (this.tableStatus === '') {
         return this.$message({

@@ -40,7 +40,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
-            size="small"
+            size="mini"
             v-model.trim="scope.row.name"
           />
         </template>
@@ -49,7 +49,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
-            size="small"
+            size="mini"
             v-model.trim="scope.row.creditCode"
           />
         </template>
@@ -58,7 +58,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
-            size="small"
+            size="mini"
             v-model.trim="scope.row.marketSubject"
           />
         </template>
@@ -71,7 +71,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
-            size="small"
+            size="mini"
             v-model.trim="scope.row.businessScope"
           />
         </template>
@@ -95,7 +95,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             placeholder="请输入"
-            size="small"
+            size="mini"
             style="width: 100%"
             v-model.trim="scope.row.money"
           />
@@ -109,7 +109,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             placeholder="请输入"
-            size="small"
+            size="mini"
             style="width: 100%"
             v-model.trim="scope.row.personalContribution"
           />
@@ -119,7 +119,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             placeholder="请输入"
-            size="small"
+            size="mini"
             style="width: 100%"
             v-model.trim="scope.row.fundedRatio"
           />
@@ -221,7 +221,7 @@ export default {
         }
         this.$store.dispatch('updateStatus', '14')
         console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
+      } else if (this.tableStatus === '2'||this.tableStatus === '3') {
         this.$store.dispatch('updateStatus', '14')
       } else if (this.tableStatus === '') {
         return this.$message({

@@ -17,11 +17,20 @@
           />
         </template>
       </el-table-column>
-      <el-table-column prop="familiesType" label="称谓" :width="this.$attrs.hiddenOptions ? 100 : null">
+      <el-table-column
+        prop="relationship"
+        label="与本人关系"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select v-model="scope.row.title" placeholder="请选择">
+          <el-select
+            v-model.trim="scope.row.relationship"
+            filterable
+            clearable
+            placeholder="请选择"
+          >
             <el-option
-              v-for="item in $utils.familiesType"
+              v-for="item in list"
               :key="item.key"
               :label="item.value"
               :value="item.key"
@@ -29,69 +38,84 @@
           </el-select>
         </template>
         <template scope="scope" v-else>{{
-          scope.row.title | filterSelect($utils.familiesType)
+          scope.row.relationship | filterSelect(list)
         }}</template>
       </el-table-column>
-      <el-table-column prop="name" label="姓名" :width="this.$attrs.hiddenOptions ? 100 : null">
+      <el-table-column
+        prop="name"
+        label="姓名"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+          <el-input v-model.trim="scope.row.name" size="mini" placeholder="请输入内容" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="idCard"
+        label="身份证号"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.name"
-            size="small"
+            v-model.trim="scope.row.idCard"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
       </el-table-column>
-      <el-table-column
-        prop="time"
-        label="被追究时间"
+       <el-table-column
+        prop="birthday"
+        label="出生日期"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
-            v-model.trim="scope.row.time"
+            v-model.trim="scope.row.birthday"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
-          scope.row.time | dateDay
-        }}</template>
+        <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
       <el-table-column
-        prop="reasons"
-        label="被追究刑事责任原因"
-        :width="this.$attrs.hiddenOptions ? 150 : 180"
+        prop="politicsStatus"
+        label="政治面貌"
+        :width="this.$attrs.hiddenOptions ? 100 : null"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            v-model.trim="scope.row.reasons"
-            size="small"
-            placeholder="请输入内容"
-          />
-        </template>
-      </el-table-column>
-      <!-- <el-table-column prop="status" label="处理阶段" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select v-model="scope.row.status" placeholder="请选择">
+          <el-select
+            v-model.trim="scope.row.politicsStatus"
+            style="width: 100%"
+            placeholder="请选择"
+          >
             <el-option
-              v-for="item in $utils.punishStage"
-              :key="item.key"
-              :label="item.value"
-              :value="item.key"
+              v-for="(item, i) in $utils.politicsStatus"
+              :key="item"
+              :label="item"
+              :value="i"
             />
           </el-select>
         </template>
         <template scope="scope" v-else>{{
-          scope.row.status | filterSelect($utils.punishStage)
+          scope.row.politicsStatus | filterSelect($utils.politicsStatus)
         }}</template>
-      </el-table-column> -->
-      <el-table-column prop="result" label="处理结果">
+      </el-table-column>
+      <el-table-column
+        prop="duty"
+        label="工作单位及职务"
+        :width="this.$attrs.hiddenOptions ? 150 : null"
+      >
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+          <el-input v-model.trim="scope.row.duty" size="mini" placeholder="请输入内容" />
+        </template>
+      </el-table-column>
+      <el-table-column prop="desc" label="备注">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.result"
-            size="small"
+            v-model.trim="scope.row.desc"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -120,93 +144,103 @@
 </template>
 
 <script>
+import { isIdentityCard } from "../../common.js";
 export default {
   props: {
     tableStatus: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     tableData() {
-      return this.$store.getters.getCriminal
+      return this.$store.getters.getUser?.networking;
+    },
+    list() {
+      if (this.$store.getters.getUser.gender === "2") {
+        return this.$utils.womenRelationship;
+      } else {
+        return this.$utils.manRelationship;
+      }
     },
   },
   methods: {
     handleDelete(index, row) {
       if (this.tableData.length > 1) {
-        this.tableData.splice(index, 1)
+        this.tableData.splice(index, 1);
       } else {
         this.$message({
-          type: 'info',
-          message: '已经是最后一个了,不能再删了',
-        })
+          type: "info",
+          message: "已经是最后一个了,不能再删了",
+        });
       }
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '10')
+      this.$store.dispatch("updateStatusSubtract", "20");
     },
     // 清空
     handleEmpty() {
-      this.$store.dispatch('updateUser', {
-        criminal: [
+      this.$store.dispatch("updateUser", {
+        networking: [
           {
-            title: '', // 称谓
-            name: '', // 姓名
-            time: '', // 被追究时间
-            reasons: '', // 被追究责任原因
-            status: '', // 处理阶段
-            result: '', // 处理结果
+            relationship: "", // 本人关系
+            name: "",
+            idCard: "",
+            birthday: "", // 生日
+            politicsStatus: "", // 政治面貌
+            duty: "", // 现任职务
+            desc: "", // 备注
           },
         ],
-      })
+      });
     },
     // 下一项
     handleGoNextPage() {
-      if (this.tableStatus === '1') {
-        let arr = []
+      if (this.tableStatus === "1") {
+        let arr = [];
         this.tableData.map((item) => {
-          arr.push(item.title)
-          arr.push(item.name)
-          arr.push(item.time)
-          arr.push(item.reasons)
-          arr.push(item.result)
-        })
+          arr.push(item.relationship);
+          arr.push(item.name);
+          arr.push(item.politicsStatus);
+          arr.push(item.birthday);
+          arr.push(item.duty);
+          arr.push(item.desc);
+          arr.push(isIdentityCard(item.idCard));
+        });
         if (!arr.every((x) => x)) {
           return this.$message({
-            type: 'error',
-            message:
-              '请检查称谓、姓名、被追究时间、被追究责任原因、处理结果是否有误',
-          })
+            type: "error",
+            message: "请检查内容是否有误",
+          });
         }
-        this.$store.dispatch('updateStatus', '12')
-        console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '12')
-      } else if (this.tableStatus === '') {
+        this.$store.dispatch("updateStatus", "22");
+        console.log(this.tableStatus);
+      } else if (this.tableStatus === "2" || this.tableStatus === "3") {
+        this.$store.dispatch("updateStatus", "22");
+      } else if (this.tableStatus === "") {
         return this.$message({
-          type: 'error',
-          message: '请检查是否选择有无此类情况',
-        })
+          type: "error",
+          message: "请检查是否选择有无此类情况",
+        });
       }
     },
     handleAddLine() {
       this.tableData.push({
-        title: '', // 称谓
-        name: '', // 姓名
-        time: '', // 被追究时间
-        reasons: '', // 被追究责任原因
-        status: '', // 处理阶段
-        result: '', // 处理结果
-      })
+        relationship: "", // 本人关系
+        name: "",
+        idCard: "",
+        birthday: "", // 生日
+        politicsStatus: "", // 政治面貌
+        duty: "", // 现任职务
+        desc: "", // 备注
+      });
     },
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

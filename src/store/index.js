@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 var db = require('./../db.js')
-console.log('🐛:: db', db)
 var newDb = JSON.parse(JSON.stringify(db))
 Vue.use(Vuex)
 
@@ -114,7 +113,8 @@ export default new Vuex.Store({
     },
     // 设置状态
     setStatus (state) {
-      if (Number(state.status) >= 22) {
+      console.log(state.user,'db.js')
+      if (Number(state.status) >= 18) {
       } else {
         state.status++
       }

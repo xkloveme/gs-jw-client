@@ -115,7 +115,7 @@ export default {
         }
         this.onSubmit()
         console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
+      } else if (this.tableStatus === '2'||this.tableStatus === '3') {
         this.onSubmit()
       } else if (this.tableStatus === '') {
         return this.$message({

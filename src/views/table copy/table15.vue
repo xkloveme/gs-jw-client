@@ -25,7 +25,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.people"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -38,7 +38,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.realEstateertificate"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -84,7 +84,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.address"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -94,7 +94,7 @@
           <el-input-number
             v-model.trim="scope.row.area"
             style="width: 100%"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -143,7 +143,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             v-model.trim="scope.row.transactionPrice"
-            size="small"
+            size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
@@ -240,7 +240,7 @@ export default {
         }
         this.$store.dispatch('updateStatus', '18')
         console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
+      } else if (this.tableStatus === '2'||this.tableStatus === '3') {
         this.$store.dispatch('updateStatus', '18')
       } else if (this.tableStatus === '') {
         return this.$message({

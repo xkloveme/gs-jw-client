@@ -11,7 +11,7 @@
       </el-tooltip>
     </h2>
     <div>
-      <el-form :model="form" :rules="rules" label-width="120px" ref="form">
+      <el-form :model="form" :rules="rules" label-width="130px" ref="form">
         <el-col :span="6">
           <el-form-item label="姓名" prop="name">
             <el-input v-model.trim="form.name" />
@@ -62,19 +62,53 @@
             <el-input v-model.trim="form.phone" />
           </el-form-item>
         </el-col>
+        <el-col :span="8">
+          <el-form-item label="身份证号" prop="idCard">
+            <el-input v-model.trim="form.idCard" />
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="needCommunity ? 12 : 8">
+          <el-form-item label="工作单位" prop="employer">
+            <el-input v-model.trim="form.employer" />
+            <!-- <el-select @change="handleChangeNeedCommunity"
+                  clearable
+                  filterable
+                  placeholder="请选择"
+                  style="width: 100%"
+                  v-model.trim="form.employer">
+                  <el-option :key="item.key"
+                    :label="item.value"
+                    :value="item.key"
+                    v-for="item in $utils.workOrganization" />
+                </el-select> -->
+          </el-form-item>
+        </el-col>
 
         <el-col :span="8">
-          <el-form-item label="现任职位">
+          <el-form-item label="现任职位" prop="duty">
             <el-input v-model.trim="form.duty" />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="分管工作">
+          <el-form-item label="分管工作" prop="work">
             <el-input v-model.trim="form.work" />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="婚姻状况">
+          <el-form-item label="职级" prop="grade">
+            <el-select placeholder="请选择" style="width: 100%" v-model="form.grade">
+              <el-option
+                :key="item.key"
+                :label="item.value"
+                :value="item.key"
+                v-for="(item, i) in $utils.grade"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="婚姻状况" prop="marriage">
             <el-select
               clearable
               filterable
@@ -91,42 +125,37 @@
             </el-select>
           </el-form-item>
         </el-col>
-            <el-col :span="8">
-          <el-form-item label="工资收入(万元)">
-            <el-input v-model.trim="form.income" />
+        <el-col :span="8">
+          <el-form-item label="工资收入(万元)" prop="income">
+            <el-input-number
+              v-model.trim="form.income"
+              size="mini"
+              style="width: 100%"
+              placeholder="请输入内容"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="其他收入(万元)">
-            <el-input v-model.trim="form.otherIncome" />
+          <el-form-item label="其他收入(万元)" prop="otherIncome">
+            <el-input-number
+              v-model.trim="form.otherIncome"
+              size="mini"
+              style="width: 100%"
+              placeholder="请输入内容"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="家庭年收入(万元)">
-            <el-input v-model.trim="form.homeYearIncome" />
+          <el-form-item label="家庭年收入(万元)" prop="homeYearIncome">
+            <el-input-number
+              v-model.trim="form.homeYearIncome"
+              size="mini"
+              style="width: 100%"
+              placeholder="请输入内容"
+            />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="身份证号" prop="idCard">
-            <el-input v-model.trim="form.idCard" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="needCommunity ? 7 : 12">
-          <el-form-item label="单位" prop="employer">
-            <el-input v-model.trim="form.employer" />
-            <!-- <el-select @change="handleChangeNeedCommunity"
-                  clearable
-                  filterable
-                  placeholder="请选择"
-                  style="width: 100%"
-                  v-model.trim="form.employer">
-                  <el-option :key="item.key"
-                    :label="item.value"
-                    :value="item.key"
-                    v-for="item in $utils.workOrganization" />
-                </el-select> -->
-          </el-form-item>
-        </el-col>
+
         <el-col :span="12">
           <el-form-item label="个人爱好">
             <el-input v-model.trim="form.like" />
@@ -134,11 +163,11 @@
         </el-col>
 
         <el-col :span="12">
-          <el-form-item label="家庭地址">
+          <el-form-item label="家庭地址" prop="homeAddress">
             <el-input v-model.trim="form.homeAddress" />
           </el-form-item>
         </el-col>
-    
+
         <el-col :span="12">
           <el-form-item label="密码" prop="password">
             <el-input
@@ -170,24 +199,47 @@
           </el-form-item>
         </el-col>
         <h2>配偶基本信息</h2>
-        <el-col :span="8">
-          <el-form-item label="姓名">
-            <el-input v-model.trim="form.spouseName" />
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="姓名" prop="spouseName">
+              <el-input v-model.trim="form.spouseName" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="身份证号" prop="spouseIdCard">
+              <el-input v-model.trim="form.spouseIdCard" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="手机号" prop="spousePhone">
+              <el-input v-model.trim="form.spousePhone" />
+            </el-form-item>
+          </el-col>
+           <el-col :span="8">
+          <el-form-item label="工作单位" prop="spousedEmployer">
+            <el-input v-model.trim="form.spousedEmployer" />
           </el-form-item>
         </el-col>
-        <el-col :span="8">
-          <el-form-item label="身份证号" prop="spouseIdCard">
-            <el-input v-model.trim="form.spouseIdCard" />
+         <el-col :span="8">
+          <el-form-item label="现任职位" prop="spousedDuty">
+            <el-input v-model.trim="form.spousedDuty" />
           </el-form-item>
         </el-col>
-        <el-col :span="8">
-          <el-form-item label="手机号" prop="spousePhone">
-            <el-input v-model.trim="form.spousePhone" />
+         <el-col :span="8">
+          <el-form-item label="年收入(万元)" prop="spouseYearIncome">
+            <el-input-number
+              v-model.trim="form.spouseYearIncome"
+              size="mini"
+              style="width: 100%"
+              placeholder="请输入内容"
+            />
           </el-form-item>
         </el-col>
+        </el-row>
         <el-form-item label="工作简历" prop="resume">
           <resume :hiddenOptions="false" />
         </el-form-item>
+
         <el-form-item>
           <!-- <el-button @click="onSubmit"
             type="primary">打印预览</el-button> -->
@@ -217,7 +269,7 @@ export default {
       }
     };
     var validatePass2 = (rule, value, callback) => {
-      if (value !== this.form.password) {
+      if (value != this.form.password) {
         callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
@@ -230,8 +282,23 @@ export default {
       needCommunity: false,
       communityType: [],
       rules: {
-        name: [{ required: true, message: "请填写姓名", trigger: "blur" }],
+        name: [
+          { required: true, message: "请填写姓名", trigger: "blur" },
+          {
+            pattern: /^[\u4e00-\u9fa5]+$/,
+            message: "请填写正确的姓名(只支持中文)",
+            trigger: "blur",
+          },
+        ],
         gender: [{ required: true, message: "请输入性别", trigger: "change" }],
+        employer: [{ required: true, message: "请输入", trigger: "change" }],
+        duty: [{ required: true, message: "请输入", trigger: "change" }],
+        grade: [{ required: true, message: "请输入", trigger: "change" }],
+        marriage: [{ required: true, message: "请输入", trigger: "change" }],
+        income: [{ required: true, message: "请输入", trigger: "change" }],
+        otherIncome: [{ required: true, message: "请输入", trigger: "change" }],
+        homeYearIncome: [{ required: true, message: "请输入", trigger: "change" }],
+        homeAddress: [{ required: true, message: "请输入", trigger: "change" }],
         politicsStatus: [
           { required: true, message: "请选择政治面貌", trigger: "change" },
         ],
@@ -271,6 +338,14 @@ export default {
             trigger: "blur",
           },
         ],
+        spouseName: [
+          { required: false, message: "请填写姓名", trigger: "blur" },
+          {
+            pattern: /^[\u4e00-\u9fa5]+$/,
+            message: "请填写正确的姓名(只支持中文)",
+            trigger: "blur",
+          },
+        ],
         spousePhone: [
           {
             required: false,
@@ -280,8 +355,11 @@ export default {
           },
         ],
         resume: [{ required: true }],
-        password: [{ validator: validatePass, trigger: "blur" }],
-        checkPassword: [{ validator: validatePass2, trigger: "blur" }],
+        spousedEmployer: [{ required: false, message: "请输入", trigger: "change" }],
+        spousedDuty: [{ required: false, message: "请输入", trigger: "change" }],
+        spouseYearIncome: [{ required: false, message: "请输入", trigger: "change" }],
+        password: [{ required: false, validator: validatePass, trigger: "blur" }],
+        checkPassword: [{ required: false, validator: validatePass2, trigger: "blur" }],
       },
     };
   },
@@ -338,31 +416,24 @@ export default {
     handleGoNextPage() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          if (this.form.imageUrl) {
-            if (this.getResume && this.getResume.length) {
-              let arr = [];
-              this.getResume.map((item) => {
-                arr.push(item.startTime);
-                arr.push(item.endTime);
-                arr.push(item.unitName);
-                arr.push(item.department);
-                arr.push(item.job);
-              });
-              if (!arr.every((x) => x)) {
-                this.$message({
-                  type: "error",
-                  message: "请检查个人简历是否有误",
-                });
-                return false;
-              }
-            }
-            this.$store.dispatch("updateStatus", "1");
-          } else {
-            this.$message({
-              type: "error",
-              message: "请检查照片是否传入",
-            });
-          }
+          // if (this.getResume && this.getResume.length) {
+          //   let arr = [];
+          //   this.getResume.map((item) => {
+          //     arr.push(item.startTime);
+          //     arr.push(item.endTime);
+          //     arr.push(item.unitName);
+          //     arr.push(item.department);
+          //     arr.push(item.job);
+          //   });
+          //   if (!arr.every((x) => x)) {
+          //     this.$message({
+          //       type: "error",
+          //       message: "请检查个人简历是否有误",
+          //     });
+          //     return false;
+          //   }
+          // }
+          this.$store.dispatch("updateStatus", "1");
         } else {
           this.$message({
             type: "error",

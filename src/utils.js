@@ -5,17 +5,21 @@ export const gender = {
 }
 // 职级
 export const grade = [
-  { key: "01", value: "区管正职" },
-  { key: "02", value: "区管副职" },
-  { key: "03", value: "一般干部" },
-  { key: "04", value: "村主要干部" },
-  { key: "05", value: "村一般干部" },
-  { key: "06", value: "普通党员" },
-  { key: "07", value: "其他" },
-  { key: "08", value: "中层正职" },
-  { key: "09", value: "中层副职" },
-  { key: "10", value: "国有企业管理人员" },
-  { key: "11", value: "国有企业其他人员" },
+    { key: "01", value: "县处级" },
+  { key: "02", value: "乡科级" },
+  { key: "03", value: "普通干部" },
+  { key: "04", value: "其他人员" },
+  // { key: "01", value: "区管正职" },
+  // { key: "02", value: "区管副职" },
+  // { key: "03", value: "一般干部" },
+  // { key: "04", value: "村主要干部" },
+  // { key: "05", value: "村一般干部" },
+  // { key: "06", value: "普通党员" },
+  // { key: "07", value: "其他" },
+  // { key: "08", value: "中层正职" },
+  // { key: "09", value: "中层副职" },
+  // { key: "10", value: "国有企业管理人员" },
+  // { key: "11", value: "国有企业其他人员" },
 ]
 // 职位
 export const position = [
@@ -803,6 +807,7 @@ export const identification = [
 export const childrenType = [
   { key: "01", value: "儿子" },
   { key: "02", value: "女儿" },
+  { key: "03", value: "配偶" },
 ]
 // 表9 称谓
 export const familiesType = [
@@ -873,6 +878,12 @@ export const houseProperty = [
   // { key: "06", value: "赠与他人" },
   // { key: "07", value: "其他去向" },
 ]
+// 房产交易类型
+export const homesteadType = [
+  { key: "01", value: "购入" },
+  { key: "02", value: "出售" },
+  { key: "03", value: "出租" },
+]
 // 表15 房产去向
 export const realEstate = [
   // { key: "01", value: "购买" },
@@ -901,6 +912,14 @@ export const marketEntities = [
   { key: "03", value: "合伙企业" },
   { key: "04", value: "有限责任公司" },
   { key: "05", value: "农民专业合作社" },
+]
+
+// 财产种类
+export const moneyType = [
+  { key: "01", value: "股票" },
+  { key: "02", value: "基金" },
+  { key: "03", value: "保险" },
+  { key: "04", value: "其他" },
 ]
 
 // 单位

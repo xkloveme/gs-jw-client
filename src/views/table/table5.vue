@@ -17,15 +17,15 @@
           />
         </template>
       </el-table-column>
-      <el-table-column
-        prop="change"
-        label="变化情况"
-        :width="this.$attrs.hiddenOptions ? 200 : 180"
+         <el-table-column
+        prop="title"
+        label="称谓"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select v-model="scope.row.change" placeholder="请选择">
+          <el-select v-model="scope.row.title" placeholder="请选择">
             <el-option
-              v-for="item in $utils.marriage"
+              v-for="item in $utils.childrenType"
               :key="item.key"
               :label="item.value"
               :value="item.key"
@@ -33,12 +33,13 @@
           </el-select>
         </template>
         <template scope="scope" v-else>{{
-          scope.row.change | filterSelect($utils.marriage)
+          scope.row.title | filterSelect($utils.childrenType)
         }}</template>
       </el-table-column>
       <el-table-column
         prop="time"
-        label="变化时间"
+        label="时间"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
@@ -49,19 +50,36 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
-          scope.row.time | dateDay
-        }}</template>
+        <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
-      <!-- <el-table-column prop="reasons" label="变化原因"  :width="this.$attrs.hiddenOptions ? 200 : 180">
+
+      <el-table-column prop="address" label="地点">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.reasons"
-            size="small"
+            v-model.trim="scope.row.address"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
-      </el-table-column> -->
+      </el-table-column>
+      <el-table-column prop="money" label="费用来由">
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+          <el-input
+            v-model.trim="scope.row.money"
+            size="mini"
+            placeholder="请输入内容"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column prop="reasons" label="出国事由">
+        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+          <el-input
+            v-model.trim="scope.row.reasons"
+            size="mini"
+            placeholder="请输入内容"
+          />
+        </template>
+      </el-table-column>
       <div
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
@@ -90,80 +108,87 @@ export default {
   props: {
     tableStatus: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     tableData() {
-      return this.$store.getters.getMarriage
+      return this.$store.getters.getUser?.childMoved;
     },
   },
   methods: {
     handleDelete(index, row) {
       if (this.tableData.length > 1) {
-        this.tableData.splice(index, 1)
+        this.tableData.splice(index, 1);
       } else {
         this.$message({
-          type: 'info',
-          message: '已经是最后一个了,不能再删了',
-        })
+          type: "info",
+          message: "已经是最后一个了,不能再删了",
+        });
       }
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '3')
+      this.$store.dispatch("updateStatusSubtract");
     },
     // 清空
     handleEmpty() {
-      this.$store.dispatch('updateUser', {
-        marriage: [
+      this.$store.dispatch("updateUser", {
+        childMoved: [
           {
-            change: '', // 变化情况
-            time: '',
-            reasons: '',
+           title: '', // 称谓
+    startTime: '',
+    endTime: '',
+    address: '',//地点
+    money: '',//费用来由
+    reasons: '', // 出国事由
           },
         ],
-      })
+      });
     },
     // 下一项
     handleGoNextPage() {
-      if (this.tableStatus === '1') {
-        let arr = []
+      if (this.tableStatus === "1") {
+        let arr = [];
         this.tableData.map((item) => {
-          arr.push(item.change)
-          arr.push(item.time)
-          // arr.push(item.reasons)
-        })
+          arr.push(item.title);
+          arr.push(item.time);
+          arr.push(item.address);
+          arr.push(item.money);
+          arr.push(item.reasons);
+        });
         if (!arr.every((x) => x)) {
           return this.$message({
-            type: 'error',
-            message: '请检查变化情况、变化时间是否有误',
-          })
+            type: "error",
+            message: "请检查内容是否有误",
+          });
         }
-        this.$store.dispatch('updateStatus', '5')
-        console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '5')
-      } else if (this.tableStatus === '') {
+        this.$store.dispatch("updateStatus");
+        console.log(this.tableStatus);
+      } else if (this.tableStatus === "2" || this.tableStatus === "3") {
+        this.$store.dispatch("updateStatus");
+      } else if (this.tableStatus === "") {
         return this.$message({
-          type: 'error',
-          message: '请检查是否选择有无此类情况',
-        })
+          type: "error",
+          message: "请检查是否选择有无此类情况",
+        });
       }
     },
     handleAddLine() {
       this.tableData.push({
-        change: '', // 变化情况
-        time: '',
-        reasons: '',
-      })
+          title: '', // 称谓
+    startTime: '',
+    endTime: '',
+    address: '',//地点
+    money: '',//费用来由
+    reasons: '', // 出国事由
+      });
     },
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

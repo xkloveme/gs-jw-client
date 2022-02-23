@@ -25,7 +25,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -37,7 +37,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.fundName"
-            size="small"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -53,7 +53,7 @@
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
             v-model.trim="scope.row.fundNumber"
-            size="small"
+            size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
@@ -70,7 +70,7 @@
           <el-input-number
             v-model.trim="scope.row.fundMarketValue"
             @change="inputChange"
-            size="small"
+            size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
@@ -94,7 +94,7 @@
           <el-input-number
             v-model.trim="allMarketValue"
             v-if="!this.$attrs.hiddenOptions"
-            size="small"
+            size="mini"
             @change="inputChange"
             style="width: 400px"
             placeholder="请输入内容"
@@ -210,7 +210,7 @@ export default {
         }
         this.$store.dispatch('updateStatus', '20')
         console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
+      } else if (this.tableStatus === '2'||this.tableStatus === '3') {
         this.$store.dispatch('updateStatus', '20')
       } else if (this.tableStatus === '') {
         return this.$message({

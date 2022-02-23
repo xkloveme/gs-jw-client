@@ -46,7 +46,7 @@ v-show="tableStatus == '1'"
       <template scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.name"
-          size="small"
+          size="mini"
           placeholder="请输入内容"
         />
       </template>
@@ -91,7 +91,7 @@ v-show="tableStatus == '1'"
       <template scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.work"
-          size="small"
+          size="mini"
           placeholder="请输入内容"
         />
       </template>

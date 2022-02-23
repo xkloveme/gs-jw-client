@@ -19,7 +19,7 @@
       </el-table-column>
       <el-table-column
         prop="time"
-        label="受惩处时间"
+        label="时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
@@ -29,64 +29,34 @@
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
-            
           />
         </template>
-        <template scope="scope" v-else>{{
-          scope.row.time | dateDay
-        }}</template>
+        <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
-      <el-table-column
-        prop="disposition"
-        label="所受处分"
-        :width="this.$attrs.hiddenOptions ? 100 : 180"
-      >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-select v-model="scope.row.disposition" placeholder="请选择">
-            <el-option
-              v-for="item in $utils.punishment"
-              :key="item.key"
-              :label="item.value"
-              :value="item.key"
-            />
-          </el-select>
-        </template>
-        <template scope="scope" v-else>{{
-          scope.row.disposition | filterSelect($utils.punishment)
-        }}</template>
-      </el-table-column>
-      <el-table-column prop="dispositionReasons" :width="this.$attrs.hiddenOptions ? 150 : null" label="受处分原因">
+
+      <el-table-column prop="address" label="地点">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.dispositionReasons"
-            size="small"
+            v-model.trim="scope.row.address"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
       </el-table-column>
-      <el-table-column prop="dispositionOrgans" label="惩处机关" :width="this.$attrs.hiddenOptions ? 100 : null">
+      <el-table-column prop="money" label="费用来由">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.dispositionOrgans"
-            size="small"
+            v-model.trim="scope.row.money"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
       </el-table-column>
-      <!-- <el-table-column prop="symbol" label="文号" :width="this.$attrs.hiddenOptions ? 100 : null">
+      <el-table-column prop="reasons" label="出国事由">
         <template scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.symbol"
-            size="small"
-            placeholder="请输入内容"
-          />
-        </template>
-      </el-table-column> -->
-      <el-table-column prop="desc" label="备注">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            v-model.trim="scope.row.desc"
-            size="small"
+            v-model.trim="scope.row.reasons"
+            size="mini"
             placeholder="请输入内容"
           />
         </template>
@@ -119,87 +89,82 @@ export default {
   props: {
     tableStatus: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     tableData() {
-      return this.$store.getters.getPunishment
+      return this.$store.getters.getUser?.travelAbroad;
     },
   },
   methods: {
     handleDelete(index, row) {
       if (this.tableData.length > 1) {
-        this.tableData.splice(index, 1)
+        this.tableData.splice(index, 1);
       } else {
         this.$message({
-          type: 'info',
-          message: '已经是最后一个了,不能再删了',
-        })
+          type: "info",
+          message: "已经是最后一个了,不能再删了",
+        });
       }
     },
     // 上一项
     handleGoPrevPage() {
-      this.$store.dispatch('updateStatusSubtract', '2')
+      this.$store.dispatch("updateStatusSubtract");
     },
     // 清空
     handleEmpty() {
-      this.$store.dispatch('updateUser', {
-        punishment: [
+      this.$store.dispatch("updateUser", {
+        travelAbroad: [
           {
-            time: '',
-            disposition: '', // 所受处分
-            dispositionReasons: '', // 所受处分原因
-            dispositionOrgans: '', // 所受处分机关
-            symbol: '', // 文号
-            desc: '',
+            time: "",
+            address: "", //地点
+            money: "", //费用来由
+            reasons: "", // 出国事由
           },
         ],
-      })
+      });
     },
     // 下一项
     handleGoNextPage() {
-      if (this.tableStatus === '1') {
-        let arr = []
+      if (this.tableStatus === "1") {
+        let arr = [];
         this.tableData.map((item) => {
-          arr.push(item.time)
-          arr.push(item.disposition)
-          arr.push(item.dispositionReasons)
-          arr.push(item.dispositionOrgans)
-        })
+          arr.push(item.time);
+          arr.push(item.address);
+          arr.push(item.money);
+          arr.push(item.reasons);
+        });
         if (!arr.every((x) => x)) {
           return this.$message({
-            type: 'error',
-            message: '请检查受惩罚时间、所受处分、受处分原因、惩处机关是否有误',
-          })
+            type: "error",
+            message: "请检查内容是否有误",
+          });
         }
-        this.$store.dispatch('updateStatus', '4')
-        console.log(this.tableStatus)
-      } else if (this.tableStatus === '2') {
-        this.$store.dispatch('updateStatus', '4')
-      } else if (this.tableStatus === '') {
+        this.$store.dispatch("updateStatus");
+        console.log(this.tableStatus);
+      } else if (this.tableStatus === "2" || this.tableStatus === "3") {
+        this.$store.dispatch("updateStatus");
+      } else if (this.tableStatus === "") {
         return this.$message({
-          type: 'error',
-          message: '请检查是否选择有无此类情况',
-        })
+          type: "error",
+          message: "请检查是否选择有无此类情况",
+        });
       }
     },
     handleAddLine() {
       this.tableData.push({
-        time: '',
-        disposition: '', // 所受处分
-        dispositionReasons: '', // 所受处分原因
-        dispositionOrgans: '', // 所受处分机关
-        symbol: '', // 文号
-        desc: '',
-      })
+        time: "",
+        address: "", //地点
+        money: "", //费用来由
+        reasons: "", // 出国事由
+      });
     },
   },
-}
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

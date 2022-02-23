@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu ,dialog} from 'electron'
+import { app, BrowserWindow, Menu, dialog } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import pkg from './../../.../../../../package.json'
 const nativeImage = require('electron').nativeImage;
@@ -6,7 +6,7 @@ var path = require('path')
 const version = pkg.version
 const productName = pkg.productName
 class MainWindow {
-  constructor (win) {
+  constructor(win) {
     // win代表electron窗口实例
     // win is this electron window instance
     this.win = win
@@ -44,16 +44,16 @@ class MainWindow {
           // 设为false允许跨域
           webSecurity: false,
           nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true
+          contextIsolation: false,
+          enableRemoteModule: true
         },
         frame: true
       })
       this.win.setIcon(
         nativeImage.createFromPath(
-            path.join(__dirname, "app.ico")
+          path.join(__dirname, "app.ico")
         )
-    );
+      );
       // 初始化浏览器页面
       this.initBrowserPage()
 
@@ -148,14 +148,14 @@ class MainWindow {
           //     win.webContents.send('action', 'save')
           //   }
           // },
-          {
-            label: '新建',
-            role: 'newSave',
-            accelerator: 'CmdOrCtrl+N',
-            click () {
-              win.webContents.send('action', 'new')
-            }
-          }
+          // {
+          //   label: '新建',
+          //   role: 'newSave',
+          //   accelerator: 'CmdOrCtrl+N',
+          //   click () {
+          //     win.webContents.send('action', 'new')
+          //   }
+          // }
         ]
       }
     ]
