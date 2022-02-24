@@ -47,8 +47,9 @@ module.exports = {
         mac: {
           icon: './public/app.png'
         },
-        linux: { // linux
-          icon: './public/icon.icns'
+        linux: {
+          executableName: 'simple-name',
+          icon: './public/app.png'
         },
         nsis: {
           oneClick: false, // 是否一键安装
@@ -61,7 +62,14 @@ module.exports = {
           createStartMenuShortcut: true, // 创建开始菜单图标
           shortcutName: '廉情卡报告表' // 图标名称
         },
-        publish: ['github'],
+        publish: {
+          provider: 'github',
+          repo: 'git@github.com:xkloveme/gs-jw-client.git', // git仓库
+          owner: 'xkloveme', // 拥有者
+          releaseType: 'release',
+          vPrefixedTagName: false,
+          publishAutoUpdate: false // 发布自动更新（需要配置GH_TOKEN）。 默认true],
+        },
         copyright: 'Copyright © 2022', // 版权信息
         appId: 'cn.com.watone.app',
         productName: '廉情卡报告表'
