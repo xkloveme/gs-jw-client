@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,14 +22,14 @@
         label="持有人姓名"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
             size="mini"
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
+        <template scope="scope" slot-scope="scope" v-else>
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
@@ -38,14 +38,14 @@
         label="股票名称或代码"
         :width="this.$attrs.hiddenOptions ? 200 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.stockName"
             size="mini"
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
+        <template scope="scope" slot-scope="scope" v-else>
           <span>{{ scope.row.stockName }}</span>
         </template>
       </el-table-column>
@@ -54,15 +54,16 @@
         label="持股数量"
         :width="this.$attrs.hiddenOptions ? 200 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.stockNumber"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
+        <template scope="scope" slot-scope="scope" v-else>
           <span>{{ scope.row.stockNumber }}</span>
         </template>
       </el-table-column>
@@ -70,8 +71,9 @@
         prop="stockMarketValue"
         label="填报前一交易日市值（万元）"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.stockMarketValue"
             size="mini"
             @change="inputChange"
@@ -79,7 +81,7 @@
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
+        <template scope="scope" slot-scope="scope" v-else>
           <span>{{ scope.row.stockMarketValue }}</span>
         </template>
       </el-table-column>
@@ -93,6 +95,7 @@
         >
           填报前一交易日所有股票的总市值（万元）
           <el-input-number
+       :min="0"
             v-model.trim="allMarketValue"
             v-if="!this.$attrs.hiddenOptions"
             @change="inputChange"

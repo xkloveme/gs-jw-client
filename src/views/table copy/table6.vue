@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="证件名称"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.name" placeholder="请选择">
             <el-option
               v-for="item in $utils.identification"
@@ -32,7 +32,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.name | filterSelect($utils.identification)
         }}</template>
       </el-table-column>
@@ -41,7 +41,7 @@
         label="证件号码"
         :width="this.$attrs.hiddenOptions ? 150 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.number"
             size="mini"
@@ -50,7 +50,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="licensing" label="发证机关" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.licensing"
             size="mini"
@@ -63,7 +63,7 @@
         label="发证时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 100%"
@@ -72,7 +72,7 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.time | dateDay
         }}</template>
       </el-table-column>
@@ -81,7 +81,7 @@
         label="有效期"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.validity"
             style="width: 100%"
@@ -90,12 +90,12 @@
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.validity | dateDay
         }}</template>
       </el-table-column>
       <el-table-column prop="custodyInstitutions" label="保管机构">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.custodyInstitutions"
             size="mini"

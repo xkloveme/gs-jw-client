@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="变化情况"
         :width="this.$attrs.hiddenOptions ? 200 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.change" placeholder="请选择">
             <el-option
               v-for="item in $utils.marriage"
@@ -32,7 +32,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.change | filterSelect($utils.marriage)
         }}</template>
       </el-table-column>
@@ -40,7 +40,7 @@
         prop="time"
         label="变化时间"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -49,12 +49,12 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.time | dateDay
         }}</template>
       </el-table-column>
       <!-- <el-table-column prop="reasons" label="变化原因"  :width="this.$attrs.hiddenOptions ? 200 : 180">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.reasons"
             size="mini"

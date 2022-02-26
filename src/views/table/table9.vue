@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -18,7 +18,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="企业名称">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.title"
             size="mini"
@@ -27,7 +27,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="businessScope" label="经营范围">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.businessScope"
             size="mini"
@@ -36,7 +36,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="marketSubjectType" label="企业性质">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.marketSubjectType"
             size="mini"
@@ -46,8 +46,9 @@
       </el-table-column>
 
         <el-table-column prop="money" label="注册资金(万)">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.money"
             size="mini"
             style="width: 100%"
@@ -56,8 +57,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="personalContribution" label="投资金额(万)">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.personalContribution"
             size="mini"
             style="width: 100%"
@@ -66,8 +68,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="fundedRatio" label="出资比例(%)">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
             <el-input-number
+       :min="0"
             v-model.trim="scope.row.fundedRatio"
             size="mini"
             style="width: 100%"

@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="产权人姓名"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.people"
             size="mini"
@@ -35,7 +35,7 @@
         label="不动产权证"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.realEstateertificate"
             size="mini"
@@ -47,7 +47,7 @@
       prop="agency"
       label="与本人关系"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-select
           v-model.trim="scope.row.relationship"
           placeholder="请选择"
@@ -62,7 +62,7 @@
       </template>
     </el-table-column> -->
       <el-table-column prop="source" label="房产来源" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.source" clearable placeholder="请选择">
             <el-option
               v-for="item in $utils.houseProperty"
@@ -72,7 +72,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.source | filterSelect($utils.houseProperty)
         }}</template>
       </el-table-column>
@@ -81,7 +81,7 @@
         label="具体地址"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.address"
             size="mini"
@@ -90,8 +90,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="area" label="建筑面积(m²)" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.area"
             style="width: 100%"
             size="mini"
@@ -103,7 +104,7 @@
       prop="agency"
       label="产权性质"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-select
           v-model.trim="scope.row.propertyNature"
           clearable
@@ -123,7 +124,7 @@
         label="交易时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.transactionTime"
             style="width: 150px"
@@ -132,7 +133,7 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.transactionTime | dateMonth
         }}</template>
       </el-table-column>
@@ -140,8 +141,9 @@
         prop="transactionPrice"
         label="交易价格(万元)"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.transactionPrice"
             size="mini"
             style="width: 100%"

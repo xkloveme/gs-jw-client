@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column prop="agency" label="操作" v-if="!this.$attrs.hiddenOptions">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="车辆型号"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.brand"
             size="mini"
@@ -35,7 +35,7 @@
         label="购买时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -44,15 +44,16 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
+        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
       <el-table-column
         prop="price"
         label="价格(万元)"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.price"
             size="mini"
             style="width: 100%"
@@ -65,7 +66,7 @@
         label="车牌号码"
         :width="this.$attrs.hiddenOptions ? 100 : 250"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.carNumber"
             size="mini"
@@ -84,7 +85,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="desc" label="备注">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.desc" size="mini" placeholder="请输入内容" />
         </template>
       </el-table-column>

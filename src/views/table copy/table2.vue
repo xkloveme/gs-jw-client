@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         prop="time"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -31,7 +31,7 @@
             placeholder="选择年"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.time | dateYear
         }}</template>
       </el-table-column>
@@ -40,7 +40,7 @@
         prop="assessment"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.assessment" placeholder="请选择">
             <el-option
               v-for="item in $utils.assessment"
@@ -50,12 +50,12 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.assessment | filterSelect($utils.assessment)
         }}</template>
       </el-table-column>
       <!-- <el-table-column prop="agency" label="发文机关"  :width="this.$attrs.hiddenOptions ? 100 : 180">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.agency"
             size="mini"
@@ -64,7 +64,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="symbol" label="文号"  :width="this.$attrs.hiddenOptions ? 150 : 180">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.symbol"
             size="mini"
@@ -73,7 +73,7 @@
         </template>
       </el-table-column> -->
       <el-table-column prop="desc" label="备注" >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.desc"
             size="mini"

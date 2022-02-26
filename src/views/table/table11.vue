@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="称谓"
         :width="this.$attrs.hiddenOptions ? 50 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.title" placeholder="请选择">
             <el-option
               v-for="item in $utils.familiesType10"
@@ -32,7 +32,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.title | filterSelect($utils.familiesType10)
         }}</template>
       </el-table-column>
@@ -41,7 +41,7 @@
         label="姓名"
         :width="this.$attrs.hiddenOptions ? 50 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.name" size="mini" placeholder="请输入内容" />
         </template>
       </el-table-column>
@@ -50,7 +50,7 @@
         :width="this.$attrs.hiddenOptions ? 80 : 180"
         label="任职银行"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.bank" size="mini" placeholder="请输入内容" />
         </template>
       </el-table-column>
@@ -59,7 +59,7 @@
         label="职务"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.bankDuty"
             size="mini"
@@ -72,7 +72,7 @@
         label="任职时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -81,14 +81,14 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
+        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
       <el-table-column
         prop="vadish"
         label="是否公款存放其任职银行"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.vadish" placeholder="请选择">
             <el-option
               v-for="item in $utils.livingTogether"
@@ -98,7 +98,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.isLife | filterSelect($utils.livingTogether)
         }}</template>
       </el-table-column>

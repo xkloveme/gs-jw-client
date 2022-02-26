@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -31,12 +31,13 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
+        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
 
       <el-table-column prop="num" label="数量">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
              <el-input-number
+       :min="0"
             v-model.trim="scope.row.num"
             size="mini"
             style="width: 100%"
@@ -45,7 +46,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="type" label="种类">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.type" size="mini" placeholder="请输入内容" />
         </template>
       </el-table-column>

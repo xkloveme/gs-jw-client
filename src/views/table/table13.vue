@@ -14,7 +14,7 @@
         label="操作"
         v-if="!this.$attrs.hiddenOptions"
       >
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -27,7 +27,7 @@
         label="房产来源"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.source" clearable placeholder="请选择">
             <el-option
               v-for="item in $utils.houseProperty"
@@ -37,7 +37,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.source | filterSelect($utils.houseProperty)
         }}</template>
       </el-table-column>
@@ -46,7 +46,7 @@
         label="房产性质"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select
             v-model.trim="scope.row.propertyNature"
             clearable
@@ -61,7 +61,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.propertyNature | filterSelect($utils.propertyRight)
         }}</template>
       </el-table-column>
@@ -70,7 +70,7 @@
         label="交易类型"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select
             clearable
             v-model.trim="scope.row.type"
@@ -85,7 +85,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.type | filterSelect($utils.homesteadType)
         }}</template>
       </el-table-column>
@@ -94,7 +94,7 @@
         label="具体地址"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.address"
             size="mini"
@@ -107,8 +107,9 @@
         label="建筑面积(m²)"
         :width="this.$attrs.hiddenOptions ? 100 : 135"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.area"
             size="mini"
             style="width: 100%"
@@ -122,7 +123,7 @@
         label="交易时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.transactionTime"
             style="width: 150px"
@@ -131,7 +132,7 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.transactionTime | dateMonth
         }}</template>
       </el-table-column>
@@ -140,8 +141,9 @@
         label="交易价格(万元)"
         :width="this.$attrs.hiddenOptions ? 100 : 135"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.transactionPrice"
             size="mini"
             style="width: 100%"

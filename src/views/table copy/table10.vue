@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -18,7 +18,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="称谓" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.title" placeholder="请选择">
             <el-option
               v-for="item in $utils.familiesType"
@@ -28,12 +28,12 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.title | filterSelect($utils.familiesType)
         }}</template>
       </el-table-column>
       <el-table-column prop="name" label="姓名" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
             size="mini"
@@ -46,7 +46,7 @@
         :width="this.$attrs.hiddenOptions ? 80 : 180"
         label="移居国家(地区)"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.country"
             size="mini"
@@ -59,7 +59,7 @@
         label="现居住城市"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.city"
             size="mini"
@@ -72,7 +72,7 @@
         :width="this.$attrs.hiddenOptions ? 100 : 180"
         label="移居国家证件号码"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.card"
             size="mini"
@@ -81,7 +81,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="type" label="移居类别" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.type" placeholder="请选择">
             <el-option
               v-for="item in $utils.migrate"
@@ -91,7 +91,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.type | filterSelect($utils.migrate)
         }}</template>
       </el-table-column>
@@ -100,7 +100,7 @@
         label="移居时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -109,12 +109,12 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.time | dateDay
         }}</template>
       </el-table-column>
       <el-table-column prop="desc" label="备注" >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.desc"
             size="mini"

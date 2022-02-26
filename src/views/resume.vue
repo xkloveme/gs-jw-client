@@ -7,7 +7,7 @@
     highlight-current-row
   >
     <el-table-column prop="agency" label="操作">
-      <template scope="scope" :width="50" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" :width="50" v-if="!this.$attrs.hiddenOptions">
         <i
           style="color: #f56c6c"
           class="el-icon-delete"
@@ -20,7 +20,7 @@
       label="年月"
       :width="this.$attrs.hiddenOptions ? '' : 280"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-date-picker
           v-model="scope.row.time"
           type="monthrange"
@@ -41,7 +41,7 @@
       label="单位"
       :width="this.$attrs.hiddenOptions ? '' : 180"
     >
-      <!-- <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <!-- <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-select
           v-model="scope.row.unitName"
           filterable
@@ -59,7 +59,7 @@
           </el-option>
         </el-select>
       </template> -->
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.unitName"
           size="mini"
@@ -72,7 +72,7 @@
       label="科室"
       :width="this.$attrs.hiddenOptions ? '' : 180"
     >
-      <!-- <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <!-- <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-select
           v-model="scope.row.department"
           filterable
@@ -89,7 +89,7 @@
           </el-option>
         </el-select>
       </template> -->
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.department"
           size="mini"
@@ -102,7 +102,7 @@
       label="职务"
       :width="this.$attrs.hiddenOptions ? '' : null"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input v-model.trim="scope.row.job" size="mini" placeholder="请输入职务" />
       </template>
     </el-table-column>

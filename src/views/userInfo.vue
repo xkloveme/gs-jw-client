@@ -49,9 +49,9 @@
           <el-form-item label="政治面貌" prop="politicsStatus">
             <el-select placeholder="请选择" v-model="form.politicsStatus">
               <el-option
-                :key="item"
-                :label="item"
-                :value="i"
+                :key="item.key"
+                :label="item.value"
+                :value="item.key"
                 v-for="(item, i) in $utils.politicsStatus"
               />
             </el-select>
@@ -128,6 +128,7 @@
         <el-col :span="8">
           <el-form-item label="工资收入(万元)" prop="income">
             <el-input-number
+              :min="0"
               v-model.trim="form.income"
               size="mini"
               style="width: 100%"
@@ -138,6 +139,7 @@
         <el-col :span="8">
           <el-form-item label="其他收入(万元)" prop="otherIncome">
             <el-input-number
+              :min="0"
               v-model.trim="form.otherIncome"
               size="mini"
               style="width: 100%"
@@ -148,6 +150,7 @@
         <el-col :span="8">
           <el-form-item label="家庭年收入(万元)" prop="homeYearIncome">
             <el-input-number
+              :min="0"
               v-model.trim="form.homeYearIncome"
               size="mini"
               style="width: 100%"
@@ -215,26 +218,27 @@
               <el-input v-model.trim="form.spousePhone" />
             </el-form-item>
           </el-col>
-           <el-col :span="8">
-          <el-form-item label="工作单位" prop="spousedEmployer">
-            <el-input v-model.trim="form.spousedEmployer" />
-          </el-form-item>
-        </el-col>
-         <el-col :span="8">
-          <el-form-item label="现任职位" prop="spousedDuty">
-            <el-input v-model.trim="form.spousedDuty" />
-          </el-form-item>
-        </el-col>
-         <el-col :span="8">
-          <el-form-item label="年收入(万元)" prop="spouseYearIncome">
-            <el-input-number
-              v-model.trim="form.spouseYearIncome"
-              size="mini"
-              style="width: 100%"
-              placeholder="请输入内容"
-            />
-          </el-form-item>
-        </el-col>
+          <el-col :span="8">
+            <el-form-item label="工作单位" prop="spousedEmployer">
+              <el-input v-model.trim="form.spousedEmployer" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="现任职位" prop="spousedDuty">
+              <el-input v-model.trim="form.spousedDuty" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="年收入(万元)" prop="spouseYearIncome">
+              <el-input-number
+                :min="0"
+                v-model.trim="form.spouseYearIncome"
+                size="mini"
+                style="width: 100%"
+                placeholder="请输入内容"
+              />
+            </el-form-item>
+          </el-col>
         </el-row>
         <el-form-item label="工作简历" prop="resume">
           <resume :hiddenOptions="false" />

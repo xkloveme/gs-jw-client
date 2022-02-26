@@ -11,7 +11,7 @@ v-show="tableStatus == '1'"
       prop="agency"
       label="操作"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <i
           style="color:#F56C6C"
           class="el-icon-delete"
@@ -24,7 +24,7 @@ v-show="tableStatus == '1'"
       label="本人关系"
       :width="this.$attrs.hiddenOptions?'':180"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-select
           v-model.trim="scope.row.relationship"
           placeholder="请选择"
@@ -43,7 +43,7 @@ v-show="tableStatus == '1'"
       label="姓名"
       :width="this.$attrs.hiddenOptions?'':180"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.name"
           size="mini"
@@ -56,7 +56,7 @@ v-show="tableStatus == '1'"
       label="出生年月"
       :width="this.$attrs.hiddenOptions?'':180"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-date-picker
           v-model.trim="scope.row.birth"
           style="width:150px"
@@ -70,7 +70,7 @@ v-show="tableStatus == '1'"
       prop="politicsStatus"
       label="政治面貌"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-select
           v-model.trim="scope.row.politicsStatus"
           placeholder="请选择"
@@ -88,7 +88,7 @@ v-show="tableStatus == '1'"
       prop="work"
       label="工作单位及职务"
     >
-      <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.work"
           size="mini"

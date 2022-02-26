@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,26 +22,26 @@
         label="持有人姓名"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
             size="mini"
             placeholder="请输入内容"
           />
         </template>
-         <template scope="scope" v-else>
+         <template scope="scope" slot-scope="scope" v-else>
           <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
       <el-table-column prop="fundName" label="基金名称或代码" :width="this.$attrs.hiddenOptions ? 200 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.fundName"
             size="mini"
             placeholder="请输入内容"
           />
         </template>
-         <template scope="scope" v-else>
+         <template scope="scope" slot-scope="scope" v-else>
           <span >{{ scope.row.fundName }}</span>
         </template>
       </el-table-column>
@@ -50,15 +50,16 @@
         label="基金份额"
         :width="this.$attrs.hiddenOptions ? 200 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.fundNumber"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
         </template>
-         <template scope="scope" v-else>
+         <template scope="scope" slot-scope="scope" v-else>
           <span >{{ scope.row.fundNumber }}</span>
         </template>
       </el-table-column>
@@ -66,8 +67,9 @@
         prop="fundMarketValue"
         label="填报前一交易日净值（万元）"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input-number
+       :min="0"
             v-model.trim="scope.row.fundMarketValue"
             @change="inputChange"
             size="mini"
@@ -75,7 +77,7 @@
             placeholder="请输入内容"
           />
         </template>
-        <template scope="scope" v-else>
+        <template scope="scope" slot-scope="scope" v-else>
         <span >{{scope.row.fundMarketValue}}</span>
         </template>
       </el-table-column>
@@ -92,6 +94,7 @@
         >
           填报前一交易日所有基金的总净值（万元）
           <el-input-number
+       :min="0"
             v-model.trim="allMarketValue"
             v-if="!this.$attrs.hiddenOptions"
             size="mini"

@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
-        <template scope="scope">
+        <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -18,7 +18,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="称谓" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.title" placeholder="请选择">
             <el-option
               v-for="item in $utils.familiesType10"
@@ -28,12 +28,12 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.title | filterSelect($utils.familiesType10)
         }}</template>
       </el-table-column>
       <el-table-column prop="name" label="姓名" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
             size="mini"
@@ -42,7 +42,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="isLife" label="是否共同生活" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.isLife" placeholder="请选择">
             <el-option
               v-for="item in $utils.livingTogether"
@@ -52,7 +52,7 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.isLife | filterSelect($utils.livingTogether)
         }}</template>
       </el-table-column>
@@ -61,7 +61,7 @@
         label="工作、学习单位"
         :width="this.$attrs.hiddenOptions ? 150 : 180"
       >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.work"
             size="mini"
@@ -70,7 +70,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="duty" label="现任职务" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.duty"
             size="mini"
@@ -79,7 +79,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="unitNature" label="单位性质" >
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.unitNature" placeholder="请选择">
             <el-option
               v-for="item in $utils.unitProperties"
@@ -89,12 +89,12 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.unitNature | filterSelect($utils.unitProperties)
         }}</template>
       </el-table-column>
       <!-- <el-table-column prop="cardName" label="证件名称" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-select v-model="scope.row.cardName" placeholder="请选择">
             <el-option
               v-for="item in $utils.identification10"
@@ -104,12 +104,12 @@
             />
           </el-select>
         </template>
-        <template scope="scope" v-else>{{
+        <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.cardName | filterSelect($utils.identification10)
         }}</template>
       </el-table-column>
       <el-table-column prop="card" label="证件号码" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.card"
             size="mini"
