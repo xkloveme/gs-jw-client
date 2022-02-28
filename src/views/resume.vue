@@ -7,7 +7,7 @@
     highlight-current-row
   >
     <el-table-column prop="agency" label="操作">
-      <template scope="scope" slot-scope="scope" :width="50" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" :width="50" v-if="!$attrs.hiddenOptions">
         <i
           style="color: #f56c6c"
           class="el-icon-delete"
@@ -15,102 +15,25 @@
         />
       </template>
     </el-table-column>
-    <el-table-column
-      prop="time"
-      label="年月"
-      :width="this.$attrs.hiddenOptions ? '' : 280"
-    >
-      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-date-picker
-          v-model="scope.row.time"
-          type="monthrange"
-          align="right"
-          unlink-panels
-          style="width: 250px"
-          range-separator="至"
-          start-placeholder="开始年月"
-          end-placeholder="结束年月"
-          value-format="timestamp"
-          @change="changeValue"
-        >
-        </el-date-picker>
+    <el-table-column prop="phone" label="报告人手机号">
+      <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <el-input v-model.trim="scope.row.phone" size="mini" placeholder="报告人手机号" />
       </template>
     </el-table-column>
-    <el-table-column
-      prop="unitName"
-      label="单位"
-      :width="this.$attrs.hiddenOptions ? '' : 180"
-    >
-      <!-- <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-select
-          v-model="scope.row.unitName"
-          filterable
-          allow-create
-          default-first-option
-          @change="changeValue1($event, scope.$index)"
-          placeholder="请选择单位"
-        >
-          <el-option
-            v-for="(item, index) in uniNameList"
-            :key="index"
-            :label="item"
-            :value="item"
-          >
-          </el-option>
-        </el-select>
-      </template> -->
-      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+    <el-table-column prop="spousePhone" label="配偶手机号">
+      <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
         <el-input
-          v-model.trim="scope.row.unitName"
+          v-model.trim="scope.row.spousePhone"
           size="mini"
-          placeholder="请输入单位"
+          placeholder="配偶手机号"
         />
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="department"
-      label="科室"
-      :width="this.$attrs.hiddenOptions ? '' : 180"
-    >
-      <!-- <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-select
-          v-model="scope.row.department"
-          filterable
-          allow-create
-          default-first-option
-          placeholder="请选择科室"
-        >
-          <el-option
-            v-for="(item, index) in obj[scope.row.unitName]"
-            :key="index"
-            :label="item"
-            :value="item"
-          >
-          </el-option>
-        </el-select>
-      </template> -->
-      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-input
-          v-model.trim="scope.row.department"
-          size="mini"
-          placeholder="请输入科室"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="job"
-      label="职务"
-      :width="this.$attrs.hiddenOptions ? '' : null"
-    >
-      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
-        <el-input v-model.trim="scope.row.job" size="mini" placeholder="请输入职务" />
       </template>
     </el-table-column>
     <div
       slot="append"
       style="cursor: pointer; line-height: 30px; text-align: center"
       @click="handleAddLine"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <i class="el-icon-circle-plus-outline" />
       添加一行
@@ -135,7 +58,7 @@ export default {
     },
   },
   mounted() {
-    this.handleUniNameList();
+    // this.handleUniNameList();
   },
   methods: {
     handleUniNameList() {
@@ -181,12 +104,8 @@ export default {
     },
     handleAddLine() {
       this.tableData.push({
-        time: [],
-        startTime: "", //开始时间
-        endTime: "", //结束时间
-        unitName: "", //单位
-        department: "", // 科室
-        job: "", // 职务
+        phone: "",
+        spousePhone: "",
       });
     },
   },

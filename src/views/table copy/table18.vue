@@ -3,12 +3,12 @@
     <el-table :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row>
       <el-table-column prop="agency"
         label="操作"
-        v-if="!this.$attrs.hiddenOptions">
+        v-if="!$attrs.hiddenOptions">
         <template scope="scope" slot-scope="scope">
           <i style="color: #f56c6c"
             class="el-icon-delete"
@@ -19,7 +19,7 @@
         label="品牌型号"
         :width="this.$attrs.hiddenOptions ? 100 : 180">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.brand"
             size="mini"
             placeholder="请输入内容" />
@@ -29,7 +29,7 @@
         label="购买时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-date-picker v-model.trim="scope.row.time"
             style="width: 150px"
             type="date"
@@ -45,7 +45,7 @@
         label="价格(万元)"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0" v-model.trim="scope.row.price"
             size="mini"
@@ -57,7 +57,7 @@
         label="车牌号码"
         :width="this.$attrs.hiddenOptions ? 100 : 250">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.carNumber"
             size="mini"
             type="text"
@@ -75,7 +75,7 @@
         label="颜色"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.color"
             size="mini"
             placeholder="请输入内容" />
@@ -84,7 +84,7 @@
       <el-table-column prop="desc"
         label="备注">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.desc"
             size="mini"
             placeholder="请输入内容" />
@@ -93,7 +93,7 @@
       <div slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
         @click="handleAddLine"
-        v-if="!this.$attrs.hiddenOptions">
+        v-if="!$attrs.hiddenOptions">
         <i class="el-icon-circle-plus-outline" />
         添加一行
       </div>
@@ -101,7 +101,7 @@
     <el-row type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions">
+      v-if="!$attrs.hiddenOptions">
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty"
         type="primary">重置</el-button>

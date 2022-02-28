@@ -12,7 +12,7 @@
       type="flex"
       style="margin: 30px; flex-direction: column; align-items: center"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <h1>本人承诺</h1>
       <div style="color: red">
@@ -25,7 +25,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>

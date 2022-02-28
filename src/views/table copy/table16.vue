@@ -2,14 +2,14 @@
   <div>
     <el-table :data="tableData"
       v-show="tableStatus == '1'"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       class="tb-edit"
       highlight-current-row
       style="width: 100%">
       <el-table-column label="操作"
       :width="50"
         prop="agency"
-        v-if="!this.$attrs.hiddenOptions">
+        v-if="!$attrs.hiddenOptions">
         <template scope="scope" slot-scope="scope">
           <i @click="handleDelete(scope.$index, scope.row)"
             class="el-icon-delete"
@@ -20,7 +20,7 @@
         prop="people"
         :width="this.$attrs.hiddenOptions ? 100 : 130">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input placeholder="请输入内容"
             size="mini"
             v-model.trim="scope.row.people" />
@@ -31,7 +31,7 @@
         label="不动产权证"
         :width="this.$attrs.hiddenOptions ? 100 : 130"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.realEstateCertificate"
             size="mini"
@@ -43,7 +43,7 @@
       prop="agency"
       label="与本人关系"
     >
-      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
         <el-select
           v-model.trim="scope.row.relationship"
           placeholder="请选择"
@@ -61,7 +61,7 @@
         prop="whereabouts"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-select clearable
             placeholder="请选择"
             v-model="scope.row.whereabouts">
@@ -80,7 +80,7 @@
         prop="organization"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-select clearable
             placeholder="请选择"
             v-model="scope.row.source">
@@ -99,7 +99,7 @@
         prop="address"
         :width="this.$attrs.hiddenOptions ? 100 : 130">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input placeholder="请输入内容"
             size="mini"
             v-model.trim="scope.row.address" />
@@ -109,7 +109,7 @@
         prop="area"
         :width="this.$attrs.hiddenOptions ? 100 : 130">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0" placeholder="请输入"
             size="mini"
@@ -121,7 +121,7 @@
         prop="propertyNature"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-select clearable
             placeholder="请选择"
             style="width: 100%"
@@ -141,7 +141,7 @@
         prop="transactionTime"
         :width="this.$attrs.hiddenOptions ? 100 : 170">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-date-picker placeholder="选择时间"
             style="width: 150px"
             type="month"
@@ -156,7 +156,7 @@
       <el-table-column label="交易价格(万元)"
         prop="transactionPrice">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0" placeholder="请输入"
             size="mini"
@@ -167,7 +167,7 @@
       <div @click="handleAddLine"
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
-        v-if="!this.$attrs.hiddenOptions">
+        v-if="!$attrs.hiddenOptions">
         <i class="el-icon-circle-plus-outline" />
         添加一行
       </div>
@@ -175,7 +175,7 @@
     <el-row type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions">
+      v-if="!$attrs.hiddenOptions">
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty"
         type="primary">重置</el-button>

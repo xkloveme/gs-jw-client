@@ -4,11 +4,11 @@
       :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row
     >
-      <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
+      <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
         <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
@@ -17,12 +17,12 @@
           />
         </template>
       </el-table-column>
-         <el-table-column
+      <el-table-column
         prop="title"
         label="称谓"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select v-model="scope.row.title" placeholder="请选择">
             <el-option
               v-for="item in $utils.childrenType"
@@ -41,7 +41,7 @@
         label="时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -50,29 +50,32 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
+        <template scope="scope" slot-scope="scope" v-else>{{
+          scope.row.time | dateDay
+        }}</template>
       </el-table-column>
 
-      <el-table-column prop="address" label="地点">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <el-table-column prop="nation" label="国家">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
-            v-model.trim="scope.row.address"
+            v-model.trim="scope.row.nation"
             size="mini"
             placeholder="请输入内容"
           />
+        </template>
+      </el-table-column>
+      <el-table-column prop="address" label="城市">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-input v-model.trim="scope.row.city" size="mini" placeholder="请输入内容" />
         </template>
       </el-table-column>
       <el-table-column prop="money" label="费用来由">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
-          <el-input
-            v-model.trim="scope.row.money"
-            size="mini"
-            placeholder="请输入内容"
-          />
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-input v-model.trim="scope.row.money" size="mini" placeholder="请输入内容" />
         </template>
       </el-table-column>
       <el-table-column prop="reasons" label="出国事由">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.reasons"
             size="mini"
@@ -84,7 +87,7 @@
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
         @click="handleAddLine"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <i class="el-icon-circle-plus-outline" />
         添加一行
@@ -94,7 +97,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>
@@ -139,12 +142,13 @@ export default {
       this.$store.dispatch("updateUser", {
         childMoved: [
           {
-           title: '', // 称谓
-    startTime: '',
-    endTime: '',
-    address: '',//地点
-    money: '',//费用来由
-    reasons: '', // 出国事由
+            title: "", // 称谓
+            startTime: "",
+            endTime: "",
+            nation: "", //地点
+            city: "", //城市
+            money: "", //费用来由
+            reasons: "", // 出国事由
           },
         ],
       });
@@ -156,7 +160,8 @@ export default {
         this.tableData.map((item) => {
           arr.push(item.title);
           arr.push(item.time);
-          arr.push(item.address);
+          arr.push(item.nation);
+          arr.push(item.city);
           arr.push(item.money);
           arr.push(item.reasons);
         });
@@ -179,12 +184,13 @@ export default {
     },
     handleAddLine() {
       this.tableData.push({
-          title: '', // 称谓
-    startTime: '',
-    endTime: '',
-    address: '',//地点
-    money: '',//费用来由
-    reasons: '', // 出国事由
+        title: "", // 称谓
+        startTime: "",
+        endTime: "",
+        nation: "", //国家
+        city: "", //城市
+        money: "", //费用来由
+        reasons: "", // 出国事由
       });
     },
   },

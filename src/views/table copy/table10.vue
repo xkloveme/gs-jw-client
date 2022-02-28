@@ -4,11 +4,11 @@
       :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row
     >
-      <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
+      <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
         <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
@@ -18,7 +18,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="称谓" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select v-model="scope.row.title" placeholder="请选择">
             <el-option
               v-for="item in $utils.familiesType"
@@ -33,7 +33,7 @@
         }}</template>
       </el-table-column>
       <el-table-column prop="name" label="姓名" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
             size="mini"
@@ -46,7 +46,7 @@
         :width="this.$attrs.hiddenOptions ? 80 : 180"
         label="移居国家(地区)"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.country"
             size="mini"
@@ -59,7 +59,7 @@
         label="现居住城市"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.city"
             size="mini"
@@ -72,7 +72,7 @@
         :width="this.$attrs.hiddenOptions ? 100 : 180"
         label="移居国家证件号码"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.card"
             size="mini"
@@ -81,7 +81,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="type" label="移居类别" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select v-model="scope.row.type" placeholder="请选择">
             <el-option
               v-for="item in $utils.migrate"
@@ -100,7 +100,7 @@
         label="移居时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -114,7 +114,7 @@
         }}</template>
       </el-table-column>
       <el-table-column prop="desc" label="备注" >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.desc"
             size="mini"
@@ -126,7 +126,7 @@
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
         @click="handleAddLine"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <i class="el-icon-circle-plus-outline" />
         添加一行
@@ -136,7 +136,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>

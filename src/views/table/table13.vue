@@ -4,7 +4,7 @@
       :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row
     >
@@ -12,13 +12,28 @@
         prop="agency"
         :width="50"
         label="操作"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <template scope="scope" slot-scope="scope">
-          <i
-            style="color: #f56c6c"
-            class="el-icon-delete"
-            @click="handleDelete(scope.$index, scope.row)"
+          <span>
+            <i
+              style="color: #f56c6c"
+              class="el-icon-delete"
+              @click="handleDelete(scope.$index, scope.row)"
+            />
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="people"
+        label="产权人"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-input
+            v-model.trim="scope.row.people"
+            size="mini"
+            placeholder="请输入内容"
           />
         </template>
       </el-table-column>
@@ -27,7 +42,7 @@
         label="房产来源"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select v-model="scope.row.source" clearable placeholder="请选择">
             <el-option
               v-for="item in $utils.houseProperty"
@@ -46,7 +61,7 @@
         label="房产性质"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select
             v-model.trim="scope.row.propertyNature"
             clearable
@@ -65,12 +80,12 @@
           scope.row.propertyNature | filterSelect($utils.propertyRight)
         }}</template>
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         prop="type"
         label="交易类型"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select
             clearable
             v-model.trim="scope.row.type"
@@ -88,13 +103,13 @@
         <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.type | filterSelect($utils.homesteadType)
         }}</template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         prop="address"
         label="具体地址"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.address"
             size="mini"
@@ -107,9 +122,9 @@
         label="建筑面积(m²)"
         :width="this.$attrs.hiddenOptions ? 100 : 135"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
-       :min="0"
+            :min="0"
             v-model.trim="scope.row.area"
             size="mini"
             style="width: 100%"
@@ -120,10 +135,10 @@
 
       <el-table-column
         prop="transactionTime"
-        label="交易时间"
+        label="购入时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.transactionTime"
             style="width: 150px"
@@ -138,13 +153,79 @@
       </el-table-column>
       <el-table-column
         prop="transactionPrice"
-        label="交易价格(万元)"
+        label="购入价格(万元)"
         :width="this.$attrs.hiddenOptions ? 100 : 135"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
-       :min="0"
+            :min="0"
             v-model.trim="scope.row.transactionPrice"
+            size="mini"
+            style="width: 100%"
+            placeholder="请输入内容"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="saleTime"
+        label="出售时间"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-date-picker
+            v-model.trim="scope.row.saleTime"
+            style="width: 150px"
+            type="month"
+            value-format="timestamp"
+            placeholder="选择时间"
+          />
+        </template>
+        <template scope="scope" slot-scope="scope" v-else>{{
+          scope.row.saleTime | dateMonth
+        }}</template>
+      </el-table-column>
+      <el-table-column
+        prop="transactionPrice"
+        label="出售价格(万元)"
+        :width="this.$attrs.hiddenOptions ? 100 : 135"
+      >
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-input-number
+            :min="0"
+            v-model.trim="scope.row.salePrice"
+            size="mini"
+            style="width: 100%"
+            placeholder="请输入内容"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="rentTime"
+        label="出租时间"
+        :width="this.$attrs.hiddenOptions ? 100 : 180"
+      >
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-date-picker
+            v-model.trim="scope.row.rentTime"
+            style="width: 150px"
+            type="month"
+            value-format="timestamp"
+            placeholder="选择时间"
+          />
+        </template>
+        <template scope="scope" slot-scope="scope" v-else>{{
+          scope.row.rentTime | dateMonth
+        }}</template>
+      </el-table-column>
+      <el-table-column
+        prop="transactionPrice"
+        label="出租价格(万元)"
+        :width="this.$attrs.hiddenOptions ? 100 : 135"
+      >
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+          <el-input-number
+            :min="0"
+            v-model.trim="scope.row.rentPrice"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
@@ -155,7 +236,7 @@
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
         @click="handleAddLine"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <i class="el-icon-circle-plus-outline" />
         添加一行
@@ -165,7 +246,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>
@@ -210,6 +291,7 @@ export default {
       this.$store.dispatch("updateUser", {
         homestead: [
           {
+            people: "", // 产权人
             source: "", // 房产来源
             propertyNature: "", // 产权性质
             type: "", //交易类型
@@ -217,6 +299,10 @@ export default {
             area: "", // 建筑面积
             transactionTime: "", // 交易时间
             transactionPrice: "", // 交易价格
+            saleTime: "", // 出售时间
+            salePrice: "", // 出售价格
+            rentTime: "", // 出租时间
+            rentPrice: "", // 出租价格
           },
         ],
       });
@@ -226,6 +312,7 @@ export default {
       if (this.tableStatus === "1") {
         let arr = [];
         this.tableData.map((item) => {
+          arr.push(item.people);
           arr.push(item.source);
           arr.push(item.type);
           arr.push(item.address);
@@ -234,12 +321,12 @@ export default {
           arr.push(item.transactionTime);
           arr.push(item.transactionPrice >= 0);
         });
-        // if (!arr.every((x) => x)) {
-        //   return this.$message({
-        //     type: "error",
-        //     message: "请检查内容是否有误",
-        //   });
-        // }
+        if (!arr.every((x) => x)) {
+          return this.$message({
+            type: "error",
+            message: "请检查内容是否有误",
+          });
+        }
         this.$store.dispatch("updateStatus");
         console.log(this.tableStatus);
       } else if (this.tableStatus === "2" || this.tableStatus === "3") {
@@ -253,6 +340,7 @@ export default {
     },
     handleAddLine() {
       this.tableData.push({
+        people: "", // 产权人
         source: "", // 房产来源
         propertyNature: "", // 产权性质
         type: "", //交易类型
@@ -260,6 +348,10 @@ export default {
         area: "", // 建筑面积
         transactionTime: "", // 交易时间
         transactionPrice: "", // 交易价格
+        saleTime: "", // 出售时间
+        salePrice: "", // 出售价格
+        rentTime: "", // 出租时间
+        rentPrice: "", // 出租价格
       });
     },
   },

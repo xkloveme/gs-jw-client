@@ -2,11 +2,15 @@
   <div id="pdf-path" style="text-align: center">
     <h2>
       报告人基本情况
-      <el-tooltip
-        class="item"
-        content="说明：①请认真仔细填写。②身份证号码应填写18位公民身份号码。"
-        effect="dark"
-      >
+      <el-tooltip class="item" effect="dark">
+        <div slot="content">
+          说明：①工作单位应填写全称或规范简称，同时担任多个职务的，请逐个分行填写。<br />
+          ②列入和参照公务员法管理单位的填报对象，按实际担任的领导职务和职级分别填写。<br />
+          未列入参照公务员法管理的人民团体、事业单位和国有企业的填报对象，在“现任职务”
+          栏中填写职务名称，“职级”栏不填写。<br />
+          ③身份证号码应填写18位公民身份证号码.<br />
+          ④户籍地址应填写居民户口簿“地址”栏的详细地址。<br />
+        </div>
         <i class="el-icon-question" />
       </el-tooltip>
     </h2>
@@ -201,8 +205,8 @@
             </el-input>
           </el-form-item>
         </el-col>
-        <h2>配偶基本信息</h2>
-        <el-row>
+        <h2 v-if="form.marriage=='02'">配偶基本信息</h2>
+        <el-row v-if="form.marriage=='02'">
           <el-col :span="8">
             <el-form-item label="姓名" prop="spouseName">
               <el-input v-model.trim="form.spouseName" />
@@ -240,15 +244,18 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="工作简历" prop="resume">
-          <resume :hiddenOptions="false" />
-        </el-form-item>
-
-        <el-form-item>
-          <!-- <el-button @click="onSubmit"
+        <el-col :span="24">
+          <el-form-item label="备用手机号" prop="resume">
+            <resume :hiddenOptions="false" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item>
+            <!-- <el-button @click="onSubmit"
             type="primary">打印预览</el-button> -->
-          <el-button @click="handleGoNextPage">下一项</el-button>
-        </el-form-item>
+            <el-button @click="handleGoNextPage">下一项</el-button>
+          </el-form-item>
+        </el-col>
       </el-form>
     </div>
   </div>
@@ -329,7 +336,7 @@ export default {
           },
         ],
         spouseIdCard: [
-          { required: false, message: "请填写身份证号", trigger: "blur" },
+          { required: true, message: "请填写身份证号", trigger: "blur" },
           {
             min: 18,
             max: 18,
@@ -343,7 +350,7 @@ export default {
           },
         ],
         spouseName: [
-          { required: false, message: "请填写姓名", trigger: "blur" },
+          { required: true, message: "请填写姓名", trigger: "blur" },
           {
             pattern: /^[\u4e00-\u9fa5]+$/,
             message: "请填写正确的姓名(只支持中文)",
@@ -352,16 +359,16 @@ export default {
         ],
         spousePhone: [
           {
-            required: false,
+            required: true,
             pattern: /^1\d{10}$/,
             message: "请填写正确的联系电话",
             trigger: "blur",
           },
         ],
-        resume: [{ required: true }],
-        spousedEmployer: [{ required: false, message: "请输入", trigger: "change" }],
-        spousedDuty: [{ required: false, message: "请输入", trigger: "change" }],
-        spouseYearIncome: [{ required: false, message: "请输入", trigger: "change" }],
+        resume: [{ required: false }],
+        spousedEmployer: [{ required: true, message: "请输入", trigger: "change" }],
+        spousedDuty: [{ required: true, message: "请输入", trigger: "change" }],
+        spouseYearIncome: [{ required: true, message: "请输入", trigger: "change" }],
         password: [{ required: false, validator: validatePass, trigger: "blur" }],
         checkPassword: [{ required: false, validator: validatePass2, trigger: "blur" }],
       },
@@ -420,23 +427,20 @@ export default {
     handleGoNextPage() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          // if (this.getResume && this.getResume.length) {
-          //   let arr = [];
-          //   this.getResume.map((item) => {
-          //     arr.push(item.startTime);
-          //     arr.push(item.endTime);
-          //     arr.push(item.unitName);
-          //     arr.push(item.department);
-          //     arr.push(item.job);
-          //   });
-          //   if (!arr.every((x) => x)) {
-          //     this.$message({
-          //       type: "error",
-          //       message: "请检查个人简历是否有误",
-          //     });
-          //     return false;
-          //   }
-          // }
+          if (this.getResume && this.getResume.length) {
+            let arr = [];
+            this.getResume.map((item) => {
+              item.phone&&arr.push(item.phone.length==11);
+             item.spousePhone&&arr.push(item.spousePhone.length==11);
+            });
+            if (!arr.every((x) => x)) {
+              this.$message({
+                type: "error",
+                message: "请检查备用手机号是否有误",
+              });
+              return false;
+            }
+          }
           this.$store.dispatch("updateStatus", "1");
         } else {
           this.$message({

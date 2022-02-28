@@ -4,11 +4,11 @@
       :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row
     >
-      <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
+      <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
         <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
@@ -22,7 +22,7 @@
         label="受惩处时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -41,7 +41,7 @@
         label="所受处分"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select v-model="scope.row.disposition" placeholder="请选择">
             <el-option
               v-for="item in $utils.punishment"
@@ -56,7 +56,7 @@
         }}</template>
       </el-table-column>
       <el-table-column prop="dispositionReasons" :width="this.$attrs.hiddenOptions ? 150 : null" label="受处分原因">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.dispositionReasons"
             size="mini"
@@ -65,7 +65,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="dispositionOrgans" label="惩处机关" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.dispositionOrgans"
             size="mini"
@@ -74,7 +74,7 @@
         </template>
       </el-table-column>
       <!-- <el-table-column prop="symbol" label="文号" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.symbol"
             size="mini"
@@ -83,7 +83,7 @@
         </template>
       </el-table-column> -->
       <el-table-column prop="desc" label="备注">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.desc"
             size="mini"
@@ -95,7 +95,7 @@
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
         @click="handleAddLine"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <i class="el-icon-circle-plus-outline" />
         添加一行
@@ -105,7 +105,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>

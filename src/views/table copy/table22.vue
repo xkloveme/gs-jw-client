@@ -8,13 +8,13 @@
       show-word-limit
       placeholder="请输入内容"
     />
-    <el-row type="flex" style="margin: 30px;flex-direction: column;align-items: center;" justify="center" v-if="!this.$attrs.hiddenOptions">
+    <el-row type="flex" style="margin: 30px;flex-direction: column;align-items: center;" justify="center" v-if="!$attrs.hiddenOptions">
       <h1>本人承诺</h1>
       <div style="color:red">每项表格下方的填表说明，本人已认真阅读并按要求填报。所填相关内容已与配偶、子女进行认真核实。我郑重承诺，以上所填内容真实、准确、完整，如有存在瞒报、漏报、虚报情形，自愿接受组织审查和处理。</div>
       <el-checkbox v-model="checked">我已知晓,并同意</el-checkbox>
     </el-row>
 
-    <el-row type="flex" style="margin: 30px" justify="center" v-if="!this.$attrs.hiddenOptions">
+    <el-row type="flex" style="margin: 30px" justify="center" v-if="!$attrs.hiddenOptions">
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>
       <el-button @click="handleGoNextPage">导出</el-button>

@@ -3,7 +3,7 @@
     <el-table
       :data="tableData"
       v-show="tableStatus == '1'"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       class="tb-edit"
       highlight-current-row
       style="width: 100%"
@@ -11,7 +11,7 @@
       <el-table-column
         label="操作"
         prop="agency"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <template scope="scope" slot-scope="scope">
           <i
@@ -22,7 +22,7 @@
         </template>
       </el-table-column>
       <el-table-column label="称谓" prop="title" :width="this.$attrs.hiddenOptions ? 50 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select placeholder="请选择" v-model="scope.row.title">
             <el-option
               :key="item.key"
@@ -37,7 +37,7 @@
         }}</template>
       </el-table-column>
       <el-table-column label="姓名" prop="name" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
             size="mini"
@@ -46,7 +46,7 @@
         </template>
       </el-table-column>
       <el-table-column label="统一社会信用代码" prop="creditCode" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
             size="mini"
@@ -55,7 +55,7 @@
         </template>
       </el-table-column>
       <el-table-column label="市场主体名称" prop="marketSubject" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
             size="mini"
@@ -68,7 +68,7 @@
         prop="businessScope"
         :width="this.$attrs.hiddenOptions ? 80 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             placeholder="请输入内容"
             size="mini"
@@ -77,7 +77,7 @@
         </template>
       </el-table-column>
       <el-table-column label="市场主体类型" prop="marketSubjectType" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-select placeholder="请选择" v-model="scope.row.marketSubjectType">
             <el-option
               :key="item.key"
@@ -92,7 +92,7 @@
         }}</template>
       </el-table-column>
       <el-table-column label="资金数额(出资额)(万元)" prop="money" :width="this.$attrs.hiddenOptions ? 80 : null">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0"
             placeholder="请输入"
@@ -107,7 +107,7 @@
         prop="personalContribution"
         :width="this.$attrs.hiddenOptions ? 80 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0"
             placeholder="请输入"
@@ -118,7 +118,7 @@
         </template>
       </el-table-column>
       <el-table-column label="出资比例(%)" prop="fundedRatio">
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0"
             placeholder="请输入"
@@ -132,7 +132,7 @@
         @click="handleAddLine"
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
-        v-if="!this.$attrs.hiddenOptions"
+        v-if="!$attrs.hiddenOptions"
       >
         <i class="el-icon-circle-plus-outline" />
         添加一行
@@ -142,7 +142,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>

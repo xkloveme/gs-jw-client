@@ -35,7 +35,7 @@ export default new Vuex.Store({
     },
     // 工作简历
     getResume ({ user }) {
-      return user.resume
+      return user.phones
     },
     // 股票
     getStock ({ user }) {

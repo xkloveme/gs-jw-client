@@ -22,7 +22,7 @@
       <div style="color: red; margin: 10px 0px">
         {{ item.note }}
       </div>
-      <component :is="item.content" :tableStatus="tableStatus[item.content]" />
+      <component :is="item.content" :hiddenOptions="false" :tableStatus="tableStatus[item.content]" />
     </el-tab-pane>
   </el-tabs>
 </template>

@@ -6,8 +6,8 @@
 const db = {
   uid: '', // 生成数据表唯一id
   version: '', // 版本号
-  password:'', // 密码
-  checkPassword:'', // 确认密码
+  password: '', // 密码
+  checkPassword: '', // 确认密码
   name: '', // 姓名
   gender: '', // 性别
   idCard: '', // 身份证号
@@ -29,14 +29,18 @@ const db = {
   spousedEmployer: '', // 配偶信息工作单位
   spousedDuty: '', // 配偶信息职务
   spouseYearIncome: '', // 配偶信息年度收入
-  resume: [{
-    time: [],
-    startTime: '',//开始时间
-    endTime: '',//结束时间
-    unitName: '',//单位
-    department: '', // 科室
-    job: ''// 职务
-  }], // 工作简历
+  phones: [{
+    phone: '',//报告人手机号
+    spousePhone: '',//配偶手机号
+  }],
+  // resume: [{
+  //   time: [],
+  //   startTime: '',//开始时间
+  //   endTime: '',//结束时间
+  //   unitName: '',//单位
+  //   department: '', // 科室
+  //   job: ''// 职务
+  // }], // 工作简历
   // 租用房屋情况
   house: [{
     source: '', // 标的物
@@ -57,7 +61,8 @@ const db = {
   }],
   // 个人因公出国考察(培训)和因私出国(境)情况  // 出国情况
   travelAbroad: [{
-    time: '',
+    startTime: '',
+    endTime: '',
     address: '',//地点
     money: '',//费用来由
     reasons: '', // 出国事由
@@ -66,7 +71,8 @@ const db = {
   childMoved: [{
     title: '', // 称谓
     time: '',
-    address: '',//地点
+    nation: '',//国家
+    city: '',//城市
     money: '',//费用来由
     reasons: '', // 出国事由
   }],
@@ -88,7 +94,7 @@ const db = {
   partnership: [{
     title: '',
     businessScope: '', // 经营范围
-    marketSubjectType: '', // 企业性质
+    // marketSubjectType: '', // 企业性质
     money: '', // 注册资金
     personalContribution: '', // 投资金额
     fundedRatio: '' // 出资比例
@@ -96,6 +102,7 @@ const db = {
   // 本人、配偶、子女及其配偶注册个体工商户、个人独资企业或者合伙企业的情况
   partnershipListed: [{
     title: '',
+    time: '',
     businessScope: '', // 经营范围
     marketSubjectType: '', // 企业性质
     money: '', // 注册资金
@@ -117,8 +124,7 @@ const db = {
     name: '', // 姓名
     bank: '',    // 任职银行
     bankDuty: '', // 职务
-    startTime: '',// 任职时间
-    endTime: '',// 任职时间
+    time: '',// 任职时间
     vadish: '', // 有无公款存放其任职银行
   }],
   // 亲属情况
@@ -127,7 +133,7 @@ const db = {
       relationship: '', // 本人关系
       name: '',
       idCard: '',
-      birthday: '', // 生日
+      marketSubjectType: '', // 单位性质
       politicsStatus: '', // 政治面貌
       work: '', // 现任职务
       desc: '' // 备注
@@ -135,16 +141,21 @@ const db = {
   ],
   // 房产交易情况
   homestead: [{
+    people: '', // 产权人
     source: '', // 房产来源
     propertyNature: '', // 产权性质
-    type: '',//交易类型
     address: '', // 具体地址
     area: '', // 建筑面积
     transactionTime: '', // 交易时间
-    transactionPrice: '' // 交易价格
+    transactionPrice: '', // 交易价格
+    saleTime: "", // 出售时间
+    salePrice: "", // 出售价格
+     rentTime: "", // 出租时间
+    rentPrice: "", // 出租价格
   }],
   // 本人配偶车辆情况
   car: [{
+    people: '', // 车辆所有人
     brand: '', // 品牌
     time: '', // 购买时间
     price: '', // 价格
@@ -153,6 +164,7 @@ const db = {
   }],
   // 出国证件情况
   travelDocuments: [{
+    people: '', // 拥有人
     name: '', // 证件名称
     number: '', // 证件号码
     time: '', // 发证时间

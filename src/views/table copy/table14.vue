@@ -3,13 +3,13 @@
     <el-table :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row>
       <el-table-column prop="agency"
       :width="50"
         label="操作"
-        v-if="!this.$attrs.hiddenOptions">
+        v-if="!$attrs.hiddenOptions">
         <template scope="scope" slot-scope="scope">
           <i style="color: #f56c6c"
             class="el-icon-delete"
@@ -20,7 +20,7 @@
         label="产权人姓名"
         :width="this.$attrs.hiddenOptions ? 100 : 150">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.people"
             size="mini"
             placeholder="请输入内容" />
@@ -30,7 +30,7 @@
         prop="caseNo"
         :width="this.$attrs.hiddenOptions ? 80 : 150">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input placeholder="请输入内容"
             size="mini"
             v-model.trim="scope.row.caseNo" />
@@ -40,7 +40,7 @@
       prop="agency"
       label="与本人关系"
     >
-      <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+      <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
         <el-select
           v-model.trim="scope.row.relationship"
           placeholder="请选择"
@@ -58,7 +58,7 @@
         label="房产来源"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-select v-model="scope.row.source"
             clearable
             placeholder="请选择">
@@ -77,7 +77,7 @@
         label="具体地址"
         :width="this.$attrs.hiddenOptions ? 100 : 180">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input v-model.trim="scope.row.address"
             size="mini"
             placeholder="请输入内容" />
@@ -87,7 +87,7 @@
         label="建筑面积(m²)"
         :width="this.$attrs.hiddenOptions ? 100 : 135">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0" v-model.trim="scope.row.area"
             size="mini"
@@ -99,7 +99,7 @@
         label="房产性质和功能类型"
         :width="this.$attrs.hiddenOptions ? 100 : null">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-select v-model.trim="scope.row.propertyNature"
             clearable
             style="width: 100%"
@@ -119,7 +119,7 @@
         label="交易时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-date-picker v-model.trim="scope.row.transactionTime"
             style="width: 150px"
             type="month"
@@ -135,7 +135,7 @@
         label="交易价格(万元)"
         :width="this.$attrs.hiddenOptions ? 100 : 135">
         <template scope="scope" slot-scope="scope"
-          v-if="!this.$attrs.hiddenOptions">
+          v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0" v-model.trim="scope.row.transactionPrice"
             size="mini"
@@ -146,7 +146,7 @@
       <div slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
         @click="handleAddLine"
-        v-if="!this.$attrs.hiddenOptions">
+        v-if="!$attrs.hiddenOptions">
         <i class="el-icon-circle-plus-outline" />
         添加一行
       </div>
@@ -154,7 +154,7 @@
     <el-row type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions">
+      v-if="!$attrs.hiddenOptions">
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty"
         type="primary">重置</el-button>

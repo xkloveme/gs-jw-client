@@ -812,10 +812,10 @@ export const marriage = [
 ]
 // 表5 证件名称
 export const identification = [
-  { key: "01", value: "因私普通护照" },
-  { key: "02", value: "内地居民往来港澳通行证" },
-  { key: "03", value: "大陆居民往来台湾通行证" },
-  { key: "04", value: "其他因私出国（境）证件" },
+  { key: "01", value: "普通护照" },
+  { key: "02", value: "港澳通行证" },
+  { key: "03", value: "台湾通行证" },
+  { key: "04", value: "其他" },
 ]
 // 表7 表8 称谓
 export const childrenType = [
@@ -919,13 +919,26 @@ export const propertyRight = [
   { key: "07", value: "其他" },
 ]
 // 表13 称谓 <===同===> 表12 与本人关系
+
 // 表13 市场主体类型
 export const marketEntities = [
-  { key: "01", value: "个体工商户" },
-  { key: "02", value: "个人独资企业" },
-  { key: "03", value: "合伙企业" },
-  { key: "04", value: "有限责任公司" },
-  { key: "05", value: "农民专业合作社" },
+  { key: "01", value: "党政机关" },
+  { key: "02", value: "事业单位" },
+  { key: "03", value: "国有企业" },
+  { key: "04", value: "军队" },
+  { key: "05", value: "学生" },
+  { key: "06", value: "个体工商户" },
+  { key: "07", value: "私营企业" },
+  { key: "08", value: "外商投资企业" },
+  { key: "09", value: "境内从事生产经营活动的外国（地区）企业" },
+  { key: "10", value: "外国（地区）企业常驻境内代表机构" },
+  { key: "11", value: "境外非政府组织境内代表机构" },
+  { key: "12", value: "股份有限公司" },
+  { key: "13", value: "有限责任公司" },
+  { key: "14", value: "个人独资企业" },
+  { key: "15", value: "合伙企业" },
+  { key: "16", value: "在国（境）外注册公司或投资入股" },
+  { key: "17", value: "其他" },
 ]
 
 // 财产种类

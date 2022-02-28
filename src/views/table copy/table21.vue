@@ -4,11 +4,11 @@
       :data="tableData"
       v-show="tableStatus == '1'"
       class="tb-edit"
-      :border="!this.$attrs.hiddenOptions"
+      :border="!$attrs.hiddenOptions"
       style="width: 100%"
       highlight-current-row
     >
-      <el-table-column label="操作" v-if="!this.$attrs.hiddenOptions" :width="80">
+      <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
         <template scope="scope" slot-scope="scope">
           <i
             style="color: #f56c6c"
@@ -22,7 +22,7 @@
         label="持有人姓名"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.name"
             size="mini"
@@ -38,7 +38,7 @@
         label="期货名称或代码"
         :width="this.$attrs.hiddenOptions ? 200 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.futuresName"
             size="mini"
@@ -54,7 +54,7 @@
         label="份额"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0"
             v-model.trim="scope.row.futuresNumber"
@@ -71,7 +71,7 @@
         prop="futuresMarketValue"
         label="填报前一交易日净值（万元）"
       >
-        <template scope="scope" slot-scope="scope" v-if="!this.$attrs.hiddenOptions">
+        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
           <el-input-number
        :min="0"
             v-model.trim="scope.row.futuresMarketValue"
@@ -101,14 +101,14 @@
             size="mini"
             style="width: 400px"
             placeholder="请输入内容"
-            v-if="!this.$attrs.hiddenOptions"
+            v-if="!$attrs.hiddenOptions"
           />
           <span v-else>{{ allMarketValue }}</span>
         </div>
         <div
           style="text-align: center"
           @click="handleAddLine"
-          v-if="!this.$attrs.hiddenOptions"
+          v-if="!$attrs.hiddenOptions"
         >
           <i class="el-icon-circle-plus-outline" />
           添加一行
@@ -119,7 +119,7 @@
       type="flex"
       style="margin: 30px"
       justify="center"
-      v-if="!this.$attrs.hiddenOptions"
+      v-if="!$attrs.hiddenOptions"
     >
       <el-button @click="handleGoPrevPage">上一项</el-button>
       <el-button @click="handleEmpty" type="primary">重置</el-button>
