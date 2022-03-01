@@ -1,7 +1,7 @@
 {
   "name": "collection",
   "productName": "拱墅廉情卡报告表",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "scripts": {
     "dev": "vue-cli-service electron:serve",
