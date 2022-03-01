@@ -1,6 +1,6 @@
 <template>
   <div>
-     <el-input
+    <el-input
       v-model.trim="tableData"
       type="textarea"
       :rows="20"
@@ -33,8 +33,15 @@ export default {
     return {};
   },
   computed: {
-    tableData() {
-      return this.$store.getters.getUser?.expensive;
+    tableData: {
+      get: function () {
+        return this.$store.getters.getUser?.expensive;
+      },
+      set: function (newValue) {
+        this.$store.dispatch("updateUser", {
+          expensive: newValue,
+        });
+      },
     },
   },
   methods: {
@@ -55,16 +62,7 @@ export default {
     // 清空
     handleEmpty() {
       this.$store.dispatch("updateUser", {
-        expensive: [
-          {
-            title: "", // 与本人关系
-            name: "", // 姓名
-            bank: "", // 任职银行
-            bankDuty: "", // 职务
-            time: "", // 任职时间
-            vadish: "", // 有无公款存放其任职银行
-          },
-        ],
+        expensive: "",
       });
     },
     // 下一项
@@ -73,8 +71,7 @@ export default {
         if (!this.tableData) {
           return this.$message({
             type: "error",
-            message:
-              "请检查内容是否有误",
+            message: "请检查内容是否有误",
           });
         }
         this.$store.dispatch("updateStatus");
