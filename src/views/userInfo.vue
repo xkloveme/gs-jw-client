@@ -175,7 +175,7 @@
           </el-form-item>
         </el-col>
 
-        <el-col :span="12">
+        <!-- <el-col :span="12">
           <el-form-item label="密码" prop="password">
             <el-input
               :type="passType ? 'password' : 'text'"
@@ -204,7 +204,7 @@
               />
             </el-input>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <h2 v-if="form.marriage=='02'">配偶基本信息</h2>
         <el-row v-if="form.marriage=='02'">
           <el-col :span="8">

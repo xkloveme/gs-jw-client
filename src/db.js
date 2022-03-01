@@ -119,14 +119,7 @@ const db = {
     vadish: '', // 有无公款存放其任职银行
   }],
   // 利用名贵特产类特殊资源谋取私立问题：违规公款购买、收送、占用、插手干预，本人或配偶子女及其配偶、特定关系人违规参与经营等情况
-  expensive: [{
-    title: '', // 与本人关系
-    name: '', // 姓名
-    bank: '',    // 任职银行
-    bankDuty: '', // 职务
-    time: '',// 任职时间
-    vadish: '', // 有无公款存放其任职银行
-  }],
+  expensive: '',
   // 亲属情况
   networking: [
     {
@@ -150,7 +143,7 @@ const db = {
     transactionPrice: '', // 交易价格
     saleTime: "", // 出售时间
     salePrice: "", // 出售价格
-     rentTime: "", // 出租时间
+    rentTime: "", // 出租时间
     rentPrice: "", // 出租价格
   }],
   // 本人配偶车辆情况

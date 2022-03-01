@@ -120,7 +120,7 @@
           />
         </template>
       </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
         prop="marketSubjectType"
         label="企业性质"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
@@ -138,7 +138,7 @@
         <template scope="scope" slot-scope="scope" v-else>{{
           scope.row.marketSubjectType | filterSelect($utils.marketEntities)
         }}</template>
-      </el-table-column>
+      </el-table-column> -->
       <div
         slot="append"
         style="cursor: pointer; line-height: 30px; text-align: center"
@@ -209,7 +209,7 @@ export default {
             relationship: "", // 本人关系
             name: "",
             idCard: "",
-            marketSubjectType: "", // 单位性质
+            // marketSubjectType: "", // 单位性质
             politicsStatus: "", // 政治面貌
             duty: "", // 现任职务
             desc: "", // 备注
@@ -225,9 +225,8 @@ export default {
           arr.push(item.relationship);
           arr.push(item.name);
           arr.push(item.politicsStatus);
-          arr.push(item.marketSubjectType);
+          // arr.push(item.marketSubjectType);
           arr.push(item.duty);
-          arr.push(item.desc);
           arr.push(isIdentityCard(item.idCard));
         });
         if (!arr.every((x) => x)) {

@@ -294,7 +294,6 @@ export default {
             people: "", // 产权人
             source: "", // 房产来源
             propertyNature: "", // 产权性质
-            type: "", //交易类型
             address: "", // 具体地址
             area: "", // 建筑面积
             transactionTime: "", // 交易时间
@@ -314,7 +313,6 @@ export default {
         this.tableData.map((item) => {
           arr.push(item.people);
           arr.push(item.source);
-          arr.push(item.type);
           arr.push(item.address);
           arr.push(item.area > 0);
           arr.push(item.propertyNature);
@@ -343,7 +341,6 @@ export default {
         people: "", // 产权人
         source: "", // 房产来源
         propertyNature: "", // 产权性质
-        type: "", //交易类型
         address: "", // 具体地址
         area: "", // 建筑面积
         transactionTime: "", // 交易时间

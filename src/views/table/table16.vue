@@ -224,7 +224,6 @@ export default {
           arr.push(item.code);
           arr.push(item.num);
           arr.push(item.marketValue>0);
-          arr.push(item.desc);
         });
         if (!arr.every((x) => x)) {
           return this.$message({
