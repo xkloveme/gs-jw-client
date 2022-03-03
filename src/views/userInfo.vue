@@ -174,7 +174,30 @@
             <el-input v-model.trim="form.homeAddress" />
           </el-form-item>
         </el-col>
+        <el-col :span="12">
+          <el-form-item label="街道" prop="jd">
+            <el-select
+              clearable
+              filterable
+              placeholder="请选择"
+              style="width: 100%"
+              v-model="form.jd"
+            >
+              <el-option
+                :key="item"
+                :label="item"
+                :value="item"
+                v-for="item in $utils.street"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
 
+        <el-col :span="12">
+          <el-form-item label="部门社区" prop="bm">
+            <el-input v-model.trim="form.bm" />
+          </el-form-item>
+        </el-col>
         <!-- <el-col :span="12">
           <el-form-item label="密码" prop="password">
             <el-input
@@ -205,8 +228,8 @@
             </el-input>
           </el-form-item>
         </el-col> -->
-        <h2 v-if="form.marriage=='02'">配偶基本信息</h2>
-        <el-row v-if="form.marriage=='02'">
+        <h2 v-if="form.marriage == '02'">配偶基本信息</h2>
+        <el-row v-if="form.marriage == '02'">
           <el-col :span="8">
             <el-form-item label="姓名" prop="spouseName">
               <el-input v-model.trim="form.spouseName" />
@@ -310,6 +333,8 @@ export default {
         otherIncome: [{ required: true, message: "请输入", trigger: "change" }],
         homeYearIncome: [{ required: true, message: "请输入", trigger: "change" }],
         homeAddress: [{ required: true, message: "请输入", trigger: "change" }],
+        jd: [{ required: true, message: "请输入", trigger: "change" }],
+        bm: [{ required: true, message: "请输入", trigger: "change" }],
         politicsStatus: [
           { required: true, message: "请选择政治面貌", trigger: "change" },
         ],
@@ -430,8 +455,8 @@ export default {
           if (this.getResume && this.getResume.length) {
             let arr = [];
             this.getResume.map((item) => {
-              item.phone&&arr.push(item.phone.length==11);
-             item.spousePhone&&arr.push(item.spousePhone.length==11);
+              item.phone && arr.push(item.phone.length == 11);
+              item.spousePhone && arr.push(item.spousePhone.length == 11);
             });
             if (!arr.every((x) => x)) {
               this.$message({

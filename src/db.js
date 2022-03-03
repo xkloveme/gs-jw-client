@@ -23,6 +23,8 @@ const db = {
   otherIncome: "",//其他收入
   homeYearIncome: '',//家庭年收入
   grade: '', // 职级
+  jd:'', // 街道
+  bm:'',// 部门社区
   spouseName: "",//配偶信息姓名
   spouseIdCard: '', // 配偶信息身份证号
   spousePhone: '', // 配偶信息手机号
