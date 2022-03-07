@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -18,21 +18,29 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="企业名称">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.title" size="mini" placeholder="请输入内容" />
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.title"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.title }}</div>
         </template>
       </el-table-column>
       <el-table-column prop="businessScope" label="经营范围">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.businessScope"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.businessScope }}</div>
         </template>
       </el-table-column>
       <!-- <el-table-column prop="marketSubjectType" label="企业性质">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope"   v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.marketSubjectType"
             size="mini"
@@ -42,36 +50,42 @@
       </el-table-column> -->
 
       <el-table-column prop="money" label="注册资金(万)">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
             :min="0"
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.money"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.money }}</div>
         </template>
       </el-table-column>
       <el-table-column prop="personalContribution" label="投资金额(万)">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
+            v-if="!$attrs.hiddenOptions"
             :min="0"
             v-model.trim="scope.row.personalContribution"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.personalContribution }}</div>
         </template>
       </el-table-column>
       <el-table-column prop="fundedRatio" label="所占份额(%)">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
+            v-if="!$attrs.hiddenOptions"
             :min="0"
             v-model.trim="scope.row.fundedRatio"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.fundedRatio }}</div>
         </template>
       </el-table-column>
       <div

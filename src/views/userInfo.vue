@@ -274,8 +274,8 @@
         </el-col>
         <el-col :span="24">
           <el-form-item>
-            <!-- <el-button @click="onSubmit"
-            type="primary">打印预览</el-button> -->
+            <el-button @click="onSubmit"
+            type="primary">预览</el-button>
             <el-button @click="handleGoNextPage">下一项</el-button>
           </el-form-item>
         </el-col>

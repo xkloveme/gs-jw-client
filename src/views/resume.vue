@@ -7,7 +7,7 @@
     highlight-current-row
   >
     <el-table-column prop="agency" label="操作">
-      <template scope="scope" slot-scope="scope" :width="50" v-if="!$attrs.hiddenOptions">
+      <template slot-scope="scope"   :width="50" v-if="!$attrs.hiddenOptions">
         <i
           style="color: #f56c6c"
           class="el-icon-delete"
@@ -16,12 +16,12 @@
       </template>
     </el-table-column>
     <el-table-column prop="phone" label="报告人手机号">
-      <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+      <template slot-scope="scope"   v-if="!$attrs.hiddenOptions">
         <el-input v-model.trim="scope.row.phone" size="mini" placeholder="报告人手机号" />
       </template>
     </el-table-column>
     <el-table-column prop="spousePhone" label="配偶手机号">
-      <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+      <template slot-scope="scope"   v-if="!$attrs.hiddenOptions">
         <el-input
           v-model.trim="scope.row.spousePhone"
           size="mini"

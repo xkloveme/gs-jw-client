@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,8 +22,12 @@
         label="称谓"
         :width="this.$attrs.hiddenOptions ? 50 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-select v-model="scope.row.title" placeholder="请选择">
+        <template slot-scope="scope">
+          <el-select
+            v-if="!$attrs.hiddenOptions"
+            v-model="scope.row.title"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in $utils.familiesType10"
               :key="item.key"
@@ -31,18 +35,22 @@
               :value="item.key"
             />
           </el-select>
+          <div v-else>{{ scope.row.title | filterSelect($utils.familiesType10) }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.title | filterSelect($utils.familiesType10)
-        }}</template>
       </el-table-column>
       <el-table-column
         prop="name"
         label="姓名"
         :width="this.$attrs.hiddenOptions ? 50 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.name" size="mini" placeholder="请输入内容" />
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.name"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.nanametion }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -50,8 +58,14 @@
         :width="this.$attrs.hiddenOptions ? 80 : 180"
         label="任职银行"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.bank" size="mini" placeholder="请输入内容" />
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.bank"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.bank }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -59,12 +73,14 @@
         label="职务"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.bankDuty"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.bankDuty }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -72,24 +88,29 @@
         label="任职时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
             v-model.trim="scope.row.time"
+            v-if="!$attrs.hiddenOptions"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>{{ scope.row.time | dateDay }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
       <el-table-column
         prop="vadish"
         label="是否公款存放其任职银行"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-select v-model="scope.row.vadish" placeholder="请选择">
+        <template slot-scope="scope">
+          <el-select
+            v-if="!$attrs.hiddenOptions"
+            v-model="scope.row.vadish"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in $utils.livingTogether"
               :key="item.key"
@@ -97,10 +118,8 @@
               :value="item.key"
             />
           </el-select>
+          <div v-else>{{ scope.row.vadish | filterSelect($utils.livingTogether) }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.isLife | filterSelect($utils.livingTogether)
-        }}</template>
       </el-table-column>
       <div
         slot="append"

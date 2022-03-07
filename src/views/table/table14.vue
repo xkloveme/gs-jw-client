@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column prop="agency" label="操作" v-if="!$attrs.hiddenOptions">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -17,17 +17,19 @@
           />
         </template>
       </el-table-column>
-         <el-table-column
+      <el-table-column
         prop="people"
         label="产权人"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.people"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.people }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -35,12 +37,14 @@
         label="车辆型号"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.brand"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.brand }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -48,30 +52,33 @@
         label="购买时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.time"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>{{ scope.row.time | dateDay }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column>
       <el-table-column
         prop="price"
         label="价格(万元)"
         :width="this.$attrs.hiddenOptions ? 100 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
-       :min="0"
+            v-if="!$attrs.hiddenOptions"
+            :min="0"
             v-model.trim="scope.row.price"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.price }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -79,8 +86,9 @@
         label="车牌号码"
         :width="this.$attrs.hiddenOptions ? 100 : 250"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.carNumber"
             size="mini"
             type="text"
@@ -95,11 +103,18 @@
               />
             </template>
           </el-input>
+          <div v-else>{{ scope.row.carNumber }}</div>
         </template>
       </el-table-column>
       <el-table-column prop="desc" label="备注">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.desc" size="mini" placeholder="请输入内容" />
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.desc"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.desc }}</div>
         </template>
       </el-table-column>
       <div
@@ -162,7 +177,7 @@ export default {
       this.$store.dispatch("updateUser", {
         car: [
           {
-             people: "", 
+            people: "",
             brand: "", // 品牌
             time: "", // 购买时间
             price: "", // 价格
@@ -202,7 +217,7 @@ export default {
     },
     handleAddLine() {
       this.tableData.push({
-          people: "", 
+        people: "",
         brand: "", // 品牌
         time: "", // 购买时间
         price: "", // 价格

@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,20 +22,27 @@
         label="持有人姓名"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.people" size="mini" placeholder="请输入内容" />
-        </template>
-        <template scope="scope" slot-scope="scope" v-else>
-          <span>{{ scope.row.people }}</span>
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.people"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.people }}</div>
         </template>
       </el-table-column>
       <el-table-column
         prop="type"
         label="财产种类"
-        :width="this.$attrs.hiddenOptions ? 50 : null"
+        :width="this.$attrs.hiddenOptions ? 200 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-select v-model="scope.row.type" placeholder="请选择">
+        <template slot-scope="scope">
+          <el-select
+            v-if="!$attrs.hiddenOptions"
+            v-model="scope.row.type"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in $utils.moneyType"
               :key="item.key"
@@ -43,21 +50,22 @@
               :value="item.key"
             />
           </el-select>
+          <div v-else>{{ scope.row.type | filterSelect($utils.moneyType) }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.type | filterSelect($utils.moneyType)
-        }}</template>
       </el-table-column>
       <el-table-column
         prop="name"
         label="名称"
         :width="this.$attrs.hiddenOptions ? 200 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.name" size="mini" placeholder="请输入内容" />
-        </template>
-        <template scope="scope" slot-scope="scope" v-else>
-          <span>{{ scope.row.name }}</span>
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.name"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.name }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -65,11 +73,14 @@
         label="代码"
         :width="this.$attrs.hiddenOptions ? 200 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.code" size="mini" placeholder="请输入内容" />
-        </template>
-        <template scope="scope" slot-scope="scope" v-else>
-          <span>{{ scope.row.code }}</span>
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.code"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.code }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -77,20 +88,19 @@
         label="数量"
         :width="this.$attrs.hiddenOptions ? 200 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
-       :min="0"
+            v-if="!$attrs.hiddenOptions"
+            :min="0"
             v-model.trim="scope.row.num"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
-        </template>
-        <template scope="scope" slot-scope="scope" v-else>
-          <span>{{ scope.row.num }}</span>
+          <div v-else>{{ scope.row.num }}</div>
         </template>
       </el-table-column>
-      <el-table-column prop="stockMarketValue" label="市值（万元）">
+      <el-table-column :width="this.$attrs.hiddenOptions ? 200 : 180" prop="stockMarketValue" label="市值（万元）">
         <template slot="header" slot-scope="scope">
           <el-tooltip
             class="item"
@@ -104,17 +114,16 @@
             </span>
           </el-tooltip>
         </template>
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
-       :min="0"
+            v-if="!$attrs.hiddenOptions"
+            :min="0"
             v-model.trim="scope.row.marketValue"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
-        </template>
-        <template scope="scope" slot-scope="scope" v-else>
-          <span>{{ scope.row.marketValue }}</span>
+          <div v-else>{{ scope.row.marketValue }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -122,11 +131,14 @@
         label="备注"
         :width="this.$attrs.hiddenOptions ? 200 : null"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.desc" size="mini" placeholder="请输入内容" />
-        </template>
-        <template scope="scope" slot-scope="scope" v-else>
-          <span>{{ scope.row.code }}</span>
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.desc"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ scope.row.desc }}</div>
         </template>
       </el-table-column>
       <div slot="append" style="cursor: pointer; line-height: 30px">
@@ -223,7 +235,7 @@ export default {
           arr.push(item.type);
           arr.push(item.code);
           arr.push(item.num);
-          arr.push(item.marketValue>0);
+          arr.push(item.marketValue > 0);
         });
         if (!arr.every((x) => x)) {
           return this.$message({

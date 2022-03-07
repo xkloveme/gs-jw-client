@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,33 +22,45 @@
         label="标的物"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.source"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>
+            {{ scope.row.source }}
+          </div>
         </template>
       </el-table-column>
 
       <el-table-column prop="address" label="具体地址">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
             v-model.trim="scope.row.address"
+            v-if="!$attrs.hiddenOptions"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>
+            {{ scope.row.source }}
+          </div>
         </template>
       </el-table-column>
       <el-table-column prop="transactionPrice" label="交易价格">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input-number
-       :min="0"
+            v-if="!$attrs.hiddenOptions"
+            :min="0"
             v-model.trim="scope.row.transactionPrice"
             size="mini"
             style="width: 100%"
             placeholder="请输入内容"
           />
+          <div v-else>
+            {{ scope.row.transactionPrice }}
+          </div>
         </template>
       </el-table-column>
       <div

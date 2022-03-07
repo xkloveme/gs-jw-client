@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,12 +22,14 @@
         label="拥有人"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.people"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.people }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -35,8 +37,12 @@
         label="证件名称"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-select v-model="scope.row.name" placeholder="请选择">
+        <template slot-scope="scope">
+          <el-select
+            v-model="scope.row.name"
+            placeholder="请选择"
+            v-if="!$attrs.hiddenOptions"
+          >
             <el-option
               v-for="item in $utils.identification"
               :key="item.key"
@@ -44,18 +50,18 @@
               :value="item.key"
             />
           </el-select>
+          <div v-else>{{ scope.row.name | filterSelect($utils.identification) }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.name | filterSelect($utils.identification)
-        }}</template>
       </el-table-column>
       <el-table-column prop="number" label="证件号码">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.number"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.number }}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -63,66 +69,65 @@
         label="发证时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.time"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>{{ scope.row.time | dateDay }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.time | dateDay
-        }}</template>
       </el-table-column>
       <el-table-column
         prop="startTime"
         label="证件有效期(起)"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.startTime"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>{{ scope.row.startTime | dateDay }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.startTime | dateDay
-        }}</template>
       </el-table-column>
       <el-table-column
         prop="endTime"
         label="证件有效期(止)"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.endTime"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>{{ scope.row.endTime | dateDay }}</div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.endTime | dateDay
-        }}</template>
       </el-table-column>
       <el-table-column prop="custodyInstitutions" label="保管机构">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.custodyInstitutions"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>{{ scope.row.custodyInstitutions }}</div>
         </template>
       </el-table-column>
       <!-- <el-table-column prop="approvalAuthority" label="审批机构" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope"   v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.approvalAuthority"
             size="mini"
@@ -131,7 +136,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="agency" label="委托代办机构" :width="this.$attrs.hiddenOptions ? 100 : null">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope"   v-if="!$attrs.hiddenOptions">
           <el-input
             v-model.trim="scope.row.agency"
             size="mini"

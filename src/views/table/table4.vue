@@ -9,7 +9,7 @@
       highlight-current-row
     >
       <el-table-column label="操作" v-if="!$attrs.hiddenOptions" :width="80">
-        <template scope="scope" slot-scope="scope">
+        <template slot-scope="scope">
           <i
             style="color: #f56c6c"
             class="el-icon-delete"
@@ -22,7 +22,7 @@
         label="时间"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope"   v-if="!$attrs.hiddenOptions">
           <el-date-picker
             v-model.trim="scope.row.time"
             style="width: 150px"
@@ -31,65 +31,83 @@
             placeholder="选择时间"
           />
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{ scope.row.time | dateDay }}</template>
+        <template slot-scope="scope"   v-else>{{ scope.row.time | dateDay }}</template>
       </el-table-column> -->
       <el-table-column
         prop="startTime"
         label="开始时间(起)"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.startTime"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>
+            {{ scope.row.startTime | dateDay }}
+          </div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.startTime | dateDay
-        }}</template>
       </el-table-column>
       <el-table-column
         prop="endTime"
         label="结束时间(止)"
         :width="this.$attrs.hiddenOptions ? 100 : 180"
       >
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-date-picker
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.endTime"
             style="width: 150px"
             type="date"
             value-format="timestamp"
             placeholder="选择时间"
           />
+          <div v-else>
+            {{ scope.row.endTime | dateDay }}
+          </div>
         </template>
-        <template scope="scope" slot-scope="scope" v-else>{{
-          scope.row.endTime | dateDay
-        }}</template>
       </el-table-column>
       <el-table-column prop="address" label="地点">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.address"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>
+            {{ scope.row.address }}
+          </div>
         </template>
       </el-table-column>
       <el-table-column prop="money" label="费用来由">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
-          <el-input v-model.trim="scope.row.money" size="mini" placeholder="请输入内容" />
+        <template slot-scope="scope">
+          <el-input
+            v-if="!$attrs.hiddenOptions"
+            v-model.trim="scope.row.money"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>
+            {{ scope.row.money }}
+          </div>
         </template>
       </el-table-column>
       <el-table-column prop="reasons" label="出国事由">
-        <template scope="scope" slot-scope="scope" v-if="!$attrs.hiddenOptions">
+        <template slot-scope="scope">
           <el-input
+            v-if="!$attrs.hiddenOptions"
             v-model.trim="scope.row.reasons"
             size="mini"
             placeholder="请输入内容"
           />
+          <div v-else>
+            {{ scope.row.reasons }}
+          </div>
         </template>
       </el-table-column>
       <div
